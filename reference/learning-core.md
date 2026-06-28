@@ -58,6 +58,25 @@ more than four new jargon terms in a single bite fails the bitesize sub-gate. Sp
 finishable pieces - short, winnable, rewarding. Lead with the concrete thing, attach the name second
 (show, then name): the learner should feel the mechanism before the word arrives.
 
+## Start from the familiar (ease in)
+
+Open every concept on ground the learner already stands on, then walk to the new word - never the other
+way round. The first move of a bite is an everyday anchor the learner cannot get wrong (a group chat, a
+queue at a counter, a stack of plates), and only once that lands does the formal term arrive. This is the
+"show, then name" rule turned all the way up: the very first step must be one the learner wins, because a
+small early win buys the confidence to attempt the harder say-back, while a hard first step makes them quit
+before the mechanism ever had a chance.
+
+- **Lead with the everyday, name second.** "You already do this every day in your group chat..." beats "An
+  append-only log is...". Reach the technical term as the label for a thing the learner has already pictured.
+- **Make the first question un-missable.** The opening probe is a near-certain win, not the full
+  restatement; escalate difficulty only after that first success. Build a success spiral, not a wall.
+- **When the learner says "this is hard," shrink, don't repeat.** Drop to a smaller, more familiar anchor
+  and a tinier ask - never restate the same hard framing louder. Difficulty is dosed, not dumped.
+
+This is a teaching default, not a gate line (the gate cannot measure "easy"); but a bite that opens on
+jargon and a hard ask is a coaching defect even when it clears the gate.
+
 ## Mix the senses; never type the learner
 
 Vary the channel across a session - draw one bite, sing the next, act the third - so the same web of ideas

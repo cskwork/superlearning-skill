@@ -83,3 +83,37 @@ subagents, each handed the locked contract and the finished core files to match.
 mode-routing contract; reference-links contract). `node templates/engagement-gate.mjs` PASSes the seed
 vault and the world artifact, and FAILs the fail-vault with all five sub-gate tokens. No emoji; control
 files parse clean; SKILL.md within portable frontmatter/size limits.
+
+## Amendment - "Start easy; ease in from the familiar" (same day)
+
+Trigger: a live learner hit the very first Kafka bite, said "어렵다" (this is hard), and asked the coach to
+do the drawing for them. The bite opened straight on the formal term ("append-only log / offset") with a
+full say-back as the first ask - technically gate-clean, but a coaching defect: a hard first step makes a
+learner quit before the mechanism lands. The user then asked to bake "always start easy" into the skill.
+
+Change (prose only, no gate/schema touched):
+
+- `reference/learning-core.md` - new always-on subsection **"Start from the familiar (ease in)"**: open on
+  an everyday anchor the learner cannot get wrong, name the term second, make the first question a
+  near-certain win (a success spiral, not a wall), and on a "this is hard" shrink the anchor rather than
+  repeat the framing louder. Stated explicitly as a teaching default the gate cannot measure.
+- `reference/bitesize-reward.md` - new bite-sizing rule of thumb **"Start on familiar ground"**, cross-
+  linking the ease-in law.
+- `SKILL.md` - new core principle **"Start easy; ease in from the familiar."**
+
+Reasoning: this is "show, then name" turned all the way up, plus an affective rule (confidence first). It
+is deliberately a coaching default, not a sixth sub-gate - "easy" is judgment, not a deterministic line, and
+the welded-on never-vague core already guarantees substance. Rejected alternative: a gate check on opening
+difficulty - rejected as unmeasurable and prone to false fails. The deterministic gate is unchanged, so the
+existing test suite still governs; the edits are additive prose within the body-size budget.
+
+## Fix - SKILL.md frontmatter YAML parse error (same day)
+
+A strict YAML parser rejected the frontmatter ("mapping values are not allowed in this context", line 2
+col 356): the unquoted `description` plain scalar contained a `colon + space` in `... the learner MAKES
+(not consumes): DRAW it ...`, which YAML reads as an illegal inline mapping. `skill-frontmatter-gate.mjs`
+missed it because its minimal reader is not a full YAML parser. Fix: reword to `... the learner MAKES, not
+consumes - DRAW it ...`, reusing the ` - ` separator the description already uses, so no colon-space
+remains. Verified with a strict PyYAML `safe_load` (parses clean, two keys) and the frontmatter gate
+(combined 964/1536). The README/landing copies of the description are prose, not YAML, so they need no
+change.

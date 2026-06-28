@@ -1,6 +1,6 @@
 ---
 name: superlearning
-description: Teach anyone anything so it actually sticks - through the five senses, in bite-size pieces, with a reward town that grows as you learn. Every concept still ships a jargon-free definition, a concrete worked example, and an own-words restatement; the fun wraps the substance, it never replaces it. Five channels the learner MAKES (not consumes): DRAW it (a diagram), COMPOSE it (lyrics plus a Google Lyria song), ROLEPLAY it (a "what if...?" story world), MOVE it (recall reps to music - push-ups, sit-ups, jumping jacks), JOKE it (a POW! punchline). Finishing bites earns blocks that build an isometric town - room to house to city - that doubles as a memory palace. Use for "/superlearning", "teach me X with all five senses", "make studying X fun", "gamify learning X", "I get bored studying", "help me remember X", "draw/sing/act/move/joke to learn X", "build my learning world", "오감으로 배우기", "재미있게 공부". Not for one-off factual lookups or writing production code.
+description: Teach anything so it sticks - bite-size lessons across five senses the learner MAKES (draw, sing, roleplay, move, joke), each with a plain definition, a worked example, and an own-words restatement, earning blocks that grow a memory-palace town. Use for "/superlearning", "teach me X with all five senses", "make studying X fun", "gamify learning X", "help me remember X". Not for one-off lookups or production code.
 ---
 
 # /superlearning - learn with all five senses, bite by bite, and watch your town grow
@@ -25,6 +25,10 @@ fact the user just wants stated, skip this skill and answer plainly.
   learning - the never-vague sub-gate fails it.
 - **Bite-size, one concept at a time.** Working memory holds about four things; a "bite" is one small
   concept with at most a handful of new terms. Split anything bigger. Short, finishable, rewarding.
+- **Start easy; ease in from the familiar.** Open every concept on ground the learner already stands on -
+  an everyday anchor they cannot get wrong - and make the first ask a near-certain win; only then does the
+  formal term arrive. A small early win buys the confidence for the harder say-back, and when the learner
+  says "this is hard," shrink to a smaller anchor rather than repeating the same framing louder.
 - **Mix the senses; never type the learner.** Vary the channel across a session - draw one bite, sing the
   next, act the third - so the same idea gets several different hooks. This is multi-channel *encoding*, NOT
   "matching your learning style": there is no evidence that teaching to a learner's self-reported style

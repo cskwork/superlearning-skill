@@ -25,6 +25,11 @@ Rules of thumb for cutting a bite to size:
   safe" is a bite. If the say-back would need two ideas to be complete, split it into two bites.
 - **Show, then name.** Lead with the concrete thing the learner can see or do and attach the word second -
   the mechanism should land before the label arrives, never the other way round.
+- **Start on familiar ground.** Open the bite with an everyday anchor the learner already knows (a group
+  chat, a line at a counter) and make the first ask a near-certain win; reach the new term as the name for
+  what they just pictured. A winnable first step buys the confidence for the harder say-back, and on a
+  "this is hard" you shrink the anchor rather than repeat the framing. See the ease-in law in
+  `learning-core.md`.
 - **Four new words is the ceiling, not the target.** Most good bites introduce one or two. If you are at
   four and still need another, that is the signal the bite is really two bites.
 - **Finishable beats complete.** A short bite the learner nails and a small reward they pocket beats a
