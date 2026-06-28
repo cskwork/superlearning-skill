@@ -68,11 +68,12 @@ Show, then name: the example or the activity comes first, the abstract term seco
    - MOVE (`move.md`): recall reps tied to push-ups / sit-ups / jumping jacks to music - one rep, one
      retrieved item.
    - JOKE (`joke.md`): the learner lands a POW! punchline whose joke only works if they get the mechanism.
-   By default render definition + worked example + the activity to `material/activity-NN.html` (copy
-   `templates/teach/assets/` into the vault's `assets/` once, then build from `activity-card.html`) and
-   hand the learner the path; the restatement prompt and grading stay in the terminal. Write the
-   never-vague triple AND the activity (`conceptId`, `channel`, `produced:true`, `retrievalRole`) into
-   `session-claims.json`.
+   By default render the whole study unit to `material/activity-NN.html` in FOUR beats (copy
+   `templates/teach/assets/` into the vault's `assets/` once, then build from `activity-card.html`): a
+   familiar anchor the learner cannot get wrong (open here, no jargon - difficulty always starts easy),
+   then definition + worked example, then the ONE activity, then the static restatement prompt. Hand the
+   learner the path; only the REACTIVE one-gap grading stays in the terminal. Write the never-vague triple
+   AND the activity (`conceptId`, `channel`, `produced:true`, `retrievalRole`) into `session-claims.json`.
 5. **Produce + grade - one gap at a time.** The learner makes the artifact and says the idea back. Name
    the FIRST gap by the 6-type rubric (`causal|circular|jargon|boundary|example|analogy|none`), return
    EXACTLY ONE warm follow-up question, and record `{conceptId, gapType, followUpQuestion}` in `gradings`.

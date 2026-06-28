@@ -41,13 +41,20 @@ it is the ONLY role that may flip `mastered:true` or mark a world block `earned:
 
 ## Live activity cards (material/) - the default delivery
 
-By default each bite delivers its explanation as a card, not as terminal prose. The coach copies
+By default each bite delivers its whole study unit as a card, not as terminal prose. The coach copies
 `templates/teach/assets/` into the vault's `assets/` once, then builds one `material/activity-NN.html`
-per bite from `activity-card.html` (shared `lesson.css`, so every card matches the look). The card holds
-the never-vague pair the learner reads - the jargon-free `definition` and the concrete `workedExample` -
-plus the one sensory activity brief (draw this / write this song / act this scene / do these reps / land
-this joke). The **terminal** keeps everything the learner must act on live: the one-line mode, the
-`restatementPrompt`, the one-gap grading, and the encouragement.
+per bite from `activity-card.html` (shared `lesson.css`, so every card matches), paced in four beats: a
+FAMILIAR ANCHOR the learner cannot get wrong (everyday, no jargon - the first beat, so difficulty always
+starts easy) -> the never-vague pair (the jargon-free `definition` and the concrete `workedExample`) ->
+the one sensory activity brief (draw this / write this song / act this scene / do these reps / land this
+joke) -> the own-words `restatementPrompt`. The **terminal** keeps only what is live: the one-line mode,
+the learner's typed answer, the REACTIVE one-gap follow-up, and the encouragement - because the static
+`restatementPrompt` now rides on the card with the rest of the material, while the reactive follow-up
+depends on the learner's answer and so cannot be pre-rendered. When the concept is spatial/structural,
+the worked example is rendered as an inline diagram (boxes + arrows), not prose - the `.arr` component in
+`assets/lesson.css` (`.viz` / `.arr` / `.cell` / `.ptr` / `.arr-sep`) handles sequences/arrays and state
+transitions; build ad-hoc box-and-arrow markup for trees and flows. This is the reference instance shown;
+the learner still draws their own in the activity.
 
 A card is a **live-turn artifact and is NOT gated**: `engagement-gate.mjs` scans the control files and
 `world/world.html` only, never `material/`. Set `progress-state.json.delivery` to `"terminal-text"` when

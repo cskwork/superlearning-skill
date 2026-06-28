@@ -47,7 +47,7 @@
 1. **Frame** (coach). 한 줄로 한 모드를 분류합니다. vault를 만들거나 찾습니다.
 2. **Diagnose** (coach). 가볍고 장난스러운 선행 지식 탐색. 다음 작은 한 입과, 그에 맞으면서 직전에 쓰지 않은 채널을 고릅니다.
 3. **Source** (researcher; 한 입이 외부 사실을 진술할 때만). URL과 함께 `facts.json`에 검증합니다. 검증 불가 -> 문서화된 placeholder, 지어낸 사실은 절대 금지. 순수 추론 한 입이면 건너뜁니다.
-4. **Teach the bite** (coach). 정의 + worked example을 전달하고, 학습자가 직접 MAKE하는 감각 활동 하나를 붙입니다. 기본적으로 `material/activity-NN.html` 카드로 렌더링하고, 재진술 프롬프트와 채점은 터미널에 둡니다.
+4. **Teach the bite** (coach). 정의 + worked example을 전달하고, 학습자가 직접 MAKE하는 감각 활동 하나를 붙입니다. 기본적으로 `material/activity-NN.html` 카드로 렌더링하는데, 카드는 친숙한 닻과 정의, 풀이 예시, 활동, 그리고 정적인 재진술 프롬프트를 담고, 터미널은 학습자의 답과 반응형 한 간격 채점만 다룹니다.
 5. **Produce + grade** (coach). 학습자가 산출물을 만들고 자기 말로 개념을 되돌려 말합니다. 6유형 루브릭으로 FIRST 빈틈을 짚고, 친절한 후속 질문을 정확히 하나 돌려주며, 진짜 진전을 응원합니다. 빈틈이 없어질 때까지 한 입 안에서 반복합니다.
 6. **Reward-check** (engagement-critic, 독립 - 세션/마을 경계에서). critic이 vault를 다시 읽고 gate를 실행하며, 모든 위반을 `file:locator`로 열거합니다. 블록을 `earned`로, 개념을 `mastered`로 표시할 수 있는 유일한 역할입니다. 보상 사이의 라이브 한 입은 이 단계를 건너뜁니다.
 7. **Grow the town + schedule** (coach, gate가 green이 된 뒤). 얻은 블록을 더하고, xp/streak를 올리고, 임계치를 넘으면 tier를 올리고, `world/world.html`을 다시 렌더링합니다. 분산 인출(1일 / 1주 / 1개월)을 예약합니다. 놓치면 DIFFERENT 채널로 다시 가르칩니다.

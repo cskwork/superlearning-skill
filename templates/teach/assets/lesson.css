@@ -190,6 +190,33 @@ dl { margin: var(--space-2) 0; }
 dt { font-family: var(--font-mono); color: var(--accent); font-weight: 600; margin-top: var(--space-2); }
 dd { margin: 0 0 var(--space-1) var(--space-3); color: var(--ink-soft); }
 
+/* the two pacing beats around the never-vague triple: an ease-in anchor opens the card, an own-words ask
+   closes it. Both reuse the surface tokens so they match the rest of the card. */
+.sg-anchor { background: var(--ok-soft); border: 1px solid var(--line); border-left: 3px solid var(--ok); border-radius: var(--radius); padding: var(--space-3); margin: var(--space-3) 0; }
+.sg-anchor .lead { font-family: var(--font-ui); font-weight: 700; color: var(--ok); margin: 0 0 var(--space-1); font-size: var(--step--1); letter-spacing: 0.04em; text-transform: uppercase; }
+.sg-ask { background: var(--accent-soft); border: 1px solid var(--line); border-left: 3px solid var(--accent); border-radius: var(--radius); padding: var(--space-3); margin: var(--space-4) 0; }
+.sg-ask .lead { font-family: var(--font-ui); font-weight: 700; color: var(--accent); margin: 0 0 var(--space-1); font-size: var(--step--1); letter-spacing: 0.04em; text-transform: uppercase; }
+.sg-ask .sg-q { font-family: var(--font-ui); font-weight: 600; }
+
+/* inline diagram primitives for visual worked examples (sequences/arrays, state transitions, box-and-arrow).
+   Use whenever the concept is spatial/structural so the worked example is a PICTURE, not a paragraph - a
+   two-pointer scan reads instantly as boxes with R/W tags where the same steps as prose are a wall. This is
+   the reference instance shown; the learner still draws their OWN in the .activity (make-don't-watch). */
+.viz { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-1) var(--space-2); margin: var(--space-2) 0; }
+.arr { display: inline-flex; gap: 5px; }
+.arr .cell { display: flex; flex-direction: column; align-items: center; min-width: 2.5rem; }
+.arr .ptrs { height: 1.5rem; display: flex; gap: 3px; align-items: flex-end; justify-content: center; }
+.arr .ptr { font-family: var(--font-ui); font-size: 0.68rem; font-weight: 800; line-height: 1; padding: 2px 5px; border-radius: 5px; color: #fff; }
+.arr .ptr::after { content: "▼"; display: block; text-align: center; font-size: 0.6rem; margin-top: 1px; }
+.arr .ptr.r { background: var(--accent); }
+.arr .ptr.w { background: var(--ok); }
+.arr b { display: grid; place-items: center; width: 2.5rem; height: 2.5rem; border: 2px solid var(--line); border-radius: 8px; background: var(--surface); font-family: var(--font-mono); font-size: 1rem; }
+.arr b.zero { color: var(--ink-soft); background: var(--surface-2); border-style: dashed; }
+.arr b.hot { border-color: var(--ok); color: var(--ok); }
+.arr-sep { font-family: var(--font-ui); color: var(--ink-soft); font-size: 0.78rem; text-align: center; line-height: 1.1; }
+.arr-sep b { color: var(--accent); font-size: 1.1rem; }
+.mini { font-size: var(--step--1); color: var(--ink-soft); font-family: var(--font-ui); margin: var(--space-1) 0 0; }
+
 /* the one sensory activity each bite asks the learner to MAKE (active-engagement).
    one .activity block per card; data-channel picks the accent. */
 .activity {

@@ -63,11 +63,13 @@ multiply/divide, then add/subtract). Carry it all the way through.
 4. **Assemble the Lyria prompt and hand it ready to paste.** Fill the template below with a genre, mood,
    tempo, and structure, then the co-written lyrics. The learner pastes it into Google Lyria and generates
    the track - that step is theirs to run; the skill writes the prompt, Lyria makes the sound.
-5. **Render the card.** Put the definition, the worked example, the lyric skeleton, and the Lyria prompt
-   block into `material/activity-NN.html`; keep the restatement and grading in the terminal.
+5. **Render the card.** Put the familiar anchor from step 1, the definition, the worked example, the lyric
+   skeleton, the Lyria prompt block, and the static `restatementPrompt` into `material/activity-NN.html`;
+   keep only the reactive grading in the terminal.
 6. **Write the activity entry and grade the say-back.** Append to `activities[]`: `conceptId`,
    `channel:"auditory"`, `produced:true`, the `retrievalRole`, the `artifact` path, the `prompt`. Then in
-   the terminal give the `restatementPrompt`, find the first gap, ask one follow-up, and cheer.
+   the terminal take the learner's answer to the card's `restatementPrompt`, find the first gap, ask one
+   reactive follow-up, and cheer.
 
 ### Lyria prompt template
 
@@ -103,9 +105,9 @@ and *why* multiply binds before add is fun-but-empty, and it gets flagged even w
 lyrics earn their place when the learner had to put the operations in sequence themselves and the chorus is
 that sequence.
 
-And the song is the encoding, not the check. The say-back still happens in the terminal: after they write
-the verse, they tell you in their own words why a fixed order is needed, and you grade that one gap at a
-time. A great track with no restatement is half a bite.
+And the song is the encoding, not the check. The `restatementPrompt` is on the card; in the terminal they
+answer it in their own words, and you grade that one gap at a time. A great track with no restatement is
+half a bite.
 
 ## One honest aside
 

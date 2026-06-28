@@ -58,15 +58,18 @@ through.
 3. **Hand a drawing brief, not a drawing.** Tell the learner exactly what to put on the page - "Draw three
    boxes left to right: CPU, Cache, RAM. Make the Cache small and close to the CPU, RAM big and far. Write
    the speed under each. Draw the arrow for 'ask the cache first', then the arrow for 'miss - go to RAM',
-   then the arrow for 'copy back'." Render this brief plus the definition and worked example to
-   `material/activity-NN.html` so the card matches every other card; the dialogue stays in the terminal.
+   then the arrow for 'copy back'." Render this to
+   `material/activity-NN.html` so the card matches every other card: it opens on the familiar anchor from
+   step 1, then the definition, the worked example, the drawing brief, and the static `restatementPrompt`;
+   only the reactive one-gap grading stays in the terminal.
 4. **Make them trace, not just label.** The encoding comes from committing the mechanism to the page: "With
    your pen, follow one hit (CPU - cache - done) and one miss (CPU - cache - RAM - back). Number the steps
    as you go." Tracing is what forces the recall the `retrievalRole` names.
 5. **Write the activity entry.** Append to `activities[]`: `conceptId`, `channel:"visual"`,
    `produced:true`, the `retrievalRole`, the `artifact` card path, and the `prompt` you handed over.
-6. **Grade the say-back in the terminal.** Give the `restatementPrompt`, find the FIRST gap by the 6-type
-   rubric, return exactly one warm follow-up question, and cheer the real progress before moving on.
+6. **Grade the say-back in the terminal.** The `restatementPrompt` is on the card; in the terminal take the
+   learner's answer, find the FIRST gap by the 6-type rubric, return exactly one warm reactive follow-up
+   question, and cheer the real progress before moving on.
 
 ## Keep it real
 
@@ -78,9 +81,14 @@ place only when the *placement and the arrows encode the relation*: the cache ha
 RAM, the near box has to be asked first, the miss has to walk all the way to RAM. Make the learner commit
 those choices on paper.
 
-And the picture is the encoding, not the check. The say-back still happens in the terminal: after they
-draw, they tell you in their own words why the near box is checked first, and you grade that one gap at a
-time. A beautiful diagram with no restatement is half a bite.
+One distinction keeps this honest: the WORKED EXAMPLE shown on the card may itself be a diagram (boxes,
+arrows, pointer tags) when the content is spatial - that is the reference instance, the solved case, and it
+is allowed. What is never allowed is handing the learner that same finished diagram as the ACTIVITY; the
+activity is always them drawing their own by hand. Show the mechanism as a picture; make them rebuild it.
+
+And the picture is the encoding, not the check. The `restatementPrompt` is on the card; in the terminal
+they answer it in their own words, and you grade that one gap at a time. A beautiful diagram with no
+restatement is half a bite.
 
 ## One honest aside
 
@@ -138,9 +146,8 @@ The activity entry in `session-claims.json`:
 }
 ```
 
-In the terminal, after they draw: "Nice - you put the cache right where it belongs. In your own words, why
-does asking the small box first speed things up even though it can't hold everything?" The learner answers;
-you grade one gap. If they say "because it's faster" without saying *why* checking the near box first saves
+In the terminal, after they draw, the card has already posed the `restatementPrompt`; open on their answer:
+"Nice - you put the cache right where it belongs." The learner answers; you grade one gap. If they say "because it's faster" without saying *why* checking the near box first saves
 the slow trip, that is a `causal` gap, and your single follow-up is "What does asking the cache first let
 you skip when the data is already there?" Cheer the fix, then the bite is ready for the reward boundary -
 where the independent engagement-critic, not the coach, decides whether the block is earned.

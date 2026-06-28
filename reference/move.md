@@ -89,9 +89,10 @@ Carry ONE concrete topic the whole way. Worked topic: **the ordered steps of bin
    Second round shuffled: "rep - what's step 4?" The learner does one sit-up and answers. Random access
    proves ownership.
 
-6. **Ship the say-back in the terminal.** After the reps, the `restatementPrompt`: *"Say the steps back in
-   your own words - why does each one follow from the last?"* Grade one gap at a time. A learner who can do
-   the reps but cannot explain why step 5 discards a whole half has an `example` or `causal` gap to close.
+6. **Ship the say-back.** After the reps, the `restatementPrompt` lives on the card: *"Say the steps back
+   in your own words - why does each one follow from the last?"* In the terminal take the learner's answer
+   and grade one gap at a time. A learner who can do the reps but cannot explain why step 5 discards a whole
+   half has an `example` or `causal` gap to close.
 
 The never-vague triple still ships: step 1 is the `definition`, step 2 is the `workedExample`, step 6 is
 the `restatementPrompt`. The exercise multiplied the retrievals; it did not replace the substance.
@@ -103,10 +104,10 @@ the `restatementPrompt`. The exercise multiplied the retrievals; it did not repl
   they read the steps off a sheet, or just sweat in silence, the engagement-critic flags "fun but does not
   exercise the concept" - the retrieval is the teaching, the exercise is the wrapper and a mild arousal
   boost.
-- **The say-back stays in the terminal.** The card can hold the definition, the worked trace, and the reps
-  plan; the restatement, the learner's own-words answer, and the one-gap grading happen live in the
-  terminal. Doing the reps shows the learner can recite the order; the terminal say-back shows they
-  understand WHY - and only that earns the block.
+- **The restatement prompt is on the card.** The card can hold the definition, the worked trace, the reps
+   plan, and the static `restatementPrompt`; the learner's own-words answer and the reactive one-gap grading
+   happen live in the terminal. Doing the reps shows the learner can recite the order; the terminal say-back
+   shows they understand WHY - and only that earns the block.
 - **Safety: gentle, optional, scaled.** The reps are a memory tool, not a fitness test. Scale the count
   and the exercise to the learner, swap jumping jacks for seated marches or toe-taps when needed, never
   push through pain, and let anyone opt out for plain seated recall ("text only" / "터미널로"). A learner
@@ -135,7 +136,8 @@ base lives in `sources.md`.
   style-matching - no evidence, and the gate fails the language. Pick MOVE because the content is a drill,
   then vary the channel next bite.
 - **Mistaking order for understanding.** Reciting the steps in sequence is recall of the order, not proof
-  of the idea - always close with the terminal say-back that asks WHY.
+   of the idea - always close with the say-back (prompt on the card, answer graded in the terminal) that
+   asks WHY.
 
 ## Worked example end to end
 

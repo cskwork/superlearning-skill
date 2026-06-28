@@ -56,14 +56,16 @@ middle as `(low + high) / 2` can break. Carry it all the way through.
 3. **Hand a joke brief, not a joke.** Give the comedic frame - setup (bait the obvious), misdirection,
    POW! (the mechanism is the twist) - and let the learner write the punchline: "Write a one-liner where two
    huge indices try to find their middle, and the punchline is what actually happens to their *sum* first."
-   Render the brief plus the definition and worked example to `material/activity-NN.html`.
+   Render to `material/activity-NN.html`: the familiar anchor first, then the brief plus the definition
+   and worked example, then the static `restatementPrompt` last.
 4. **Pressure-test the POW!** Ask the killer question: would the joke still work if the explanation were
    wrong? If you can swap in "binary search is just slow" and the punchline still lands, it encodes nothing -
    push for a sharper one whose laugh *depends* on the sum overflowing before the divide.
 5. **Write the activity entry.** Append to `activities[]`: `conceptId`, `channel:"humor"`, `produced:true`,
    the `retrievalRole`, the `artifact` card path, and the `prompt`.
-6. **Grade the say-back in the terminal.** Give the `restatementPrompt`, find the FIRST gap by the 6-type
-   rubric, return exactly one warm follow-up question, and cheer the real progress.
+6. **Grade the say-back in the terminal.** The `restatementPrompt` is on the card; take the learner's
+   answer, find the FIRST gap by the 6-type rubric, return exactly one warm reactive follow-up question,
+   and cheer the real progress.
 
 ## Keep it real
 
@@ -74,9 +76,9 @@ even with `produced:true`. "Programming is hard, am I right?" is not a POW!; "th
 so they wrapped right past each other" is, because you only laugh if you know low + high overflows. Make the
 correct mechanism the *only* thing that makes it funny.
 
-And the joke is the encoding, not the check. The say-back still happens in the terminal: after they land the
-POW!, they tell you in their own words why the fix avoids the overflow, and you grade that one gap at a time.
-A great punchline with no restatement is half a bite.
+And the joke is the encoding, not the check. The `restatementPrompt` is on the card; in the terminal they
+answer it in their own words, and you grade that one gap at a time. A great punchline with no restatement
+is half a bite.
 
 ## One honest aside
 
@@ -134,9 +136,9 @@ The activity entry in `session-claims.json`:
 ```
 
 The learner lands something like: "Two maxed-out indices tried to find their middle ground - but their sum
-was too big to hold, so they wrapped right past each other into the negatives. POW!" In the terminal you
-then ask: "Ha - that only works because you know the sum blows up first. In your own words, why does
-low + (high - low) / 2 dodge it?" The learner answers; you grade one gap. If they say "it's smaller" without
+was too big to hold, so they wrapped right past each other into the negatives. POW!" The card already
+posed the `restatementPrompt`, so in the terminal you open on their answer: "Ha - that only works because
+you know the sum blows up first." The learner answers; you grade one gap. If they say "it's smaller" without
 saying *why* (it adds only the half-gap to low, so it can never exceed high), that is a `causal` gap, and
 your single follow-up is "What is the biggest value low + (high - low) / 2 can reach, and why can't it pass
 high?" Cheer the fix, then the bite is ready for the reward boundary - where the independent

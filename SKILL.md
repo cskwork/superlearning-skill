@@ -48,12 +48,18 @@ fact the user just wants stated, skip this skill and answer plainly.
 
 ## Output and delivery
 
-**Default delivery: the explanation + the activity are an HTML card; the dialogue is the terminal.** Each
-bite renders its definition + worked example + the one sensory activity into a standalone card in the vault
-(`material/activity-NN.html`, built from `templates/teach/assets/` so every card matches). The terminal
-carries what the learner acts on - the one-line mode, the restatement prompt, the one-gap grading, and the
-encouragement - plus a relative path to open the card. A learner can opt out ("text only" / "터미널로") to
-get the explanation as terminal prose. Cards are live-turn artifacts and are NOT gated.
+**Default delivery: the study unit is an HTML card; the live grading is the terminal.** Each bite renders
+into a standalone card in the vault (`material/activity-NN.html`, built from `templates/teach/assets/` so
+every card matches), paced in four beats: a familiar anchor the learner cannot get wrong -> the jargon-free
+definition + concrete worked example (an inline diagram when the content is spatial - boxes and arrows,
+not prose) -> ONE sensory activity the learner makes -> the own-words restatement
+prompt. The card opens on the anchor and closes on the say-back, so the whole unit is one page and
+difficulty always starts easy (the first beat is everyday ground, never the formal term). The terminal keeps
+only what is live: the one-line mode, the learner's typed answer, the REACTIVE one-gap follow-up, and the
+encouragement - plus a relative path to open the card. (The static restatement prompt rides on the card with
+the rest of the material; the reactive follow-up must stay terminal because it depends on the learner's
+answer.) A learner can opt out ("text only" / "터미널로") to get the explanation as terminal prose. Cards are
+live-turn artifacts and are NOT gated.
 
 **The reward world** lives at `world/world.html` (built from `templates/world/`). It reads
 `progress-state.json` and draws the isometric town that grows as blocks are earned. It is a read-only
@@ -102,7 +108,8 @@ town** - create it at step 1.
    URL; unverifiable -> documented placeholder, never an invented fact. Skip for pure-reasoning bites.
 4. **Teach the bite** (coach). Deliver definition + worked example, and attach ONE sensory activity the
    learner MAKES (draw / compose / roleplay / move / joke). By default render it to
-   `material/activity-NN.html`; the restatement prompt and grading stay in the terminal. Write the
+   `material/activity-NN.html` in four beats - familiar anchor, definition + worked example, the activity,
+   and the static restatement prompt; only the reactive one-gap grading stays in the terminal. Write the
    never-vague triple + the activity (`channel`, `produced`, `retrievalRole`) into `session-claims.json`.
 5. **Produce + grade** (coach). The learner makes the artifact and says the idea back in their own words.
    Find the FIRST gap by the 6-type rubric, return exactly one friendly follow-up question, and cheer real
@@ -161,7 +168,8 @@ has a `.world-stage` and a readable `.world-summary`). Frontmatter/size of this 
 
 **Done =** mode stated in one line; vault created; every bite carries a jargon-free definition + a concrete
 real worked example + an own-words restatement prompt + ONE sensory activity the learner produced;
-explain-back graded one gap at a time; channels varied, never style-matched; the explanation + activity
-delivered as a `material/` card while restatement and grading stay in the terminal; at the reward boundary
+explain-back graded one gap at a time; channels varied, never style-matched; the card delivers the familiar
+anchor + definition + worked example + activity + the static restatement prompt, while the terminal keeps
+only the learner's answer and the reactive one-gap grading; at the reward boundary
 the independent critic's `engagement-gate.mjs` is green (output reported); blocks added only for concepts
 mastered with a passed retrieval; the town re-rendered; facts sourced or cut; spaced review scheduled.

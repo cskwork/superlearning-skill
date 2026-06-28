@@ -7,16 +7,24 @@
   <link rel="stylesheet" href="../assets/lesson.css">
 </head>
 <body>
-<!-- Live bite card: ONE concept's definition + worked example + ONE sensory activity the learner MAKES.
-     The restatement prompt, the one-gap grading, and the encouragement all stay in the terminal --
-     this card is the explanation + the thing to do, not the dialogue. NOT gated by engagement-gate.mjs
-     (that gates the control files + world only). Build one per bite as material/activity-NN.html,
-     reusing assets/lesson.css for one look. Keep exactly ONE .activity block; pick its channel. -->
+<!-- Live bite card, paced in FOUR beats so the learner eases in and closes on a say-back:
+      1) FAMILIAR ANCHOR (everyday, no jargon, cannot-get-wrong) -> 2) definition + worked example
+      -> 3) ONE sensory activity the learner MAKES -> 4) the own-words restatement prompt.
+      The terminal keeps only the learner's typed answer + the REACTIVE one-gap follow-up + encouragement.
+      Build one per bite as material/activity-NN.html, reusing assets/lesson.css. NOT gated by
+      engagement-gate.mjs (that gates the control files + world only). Keep exactly ONE .activity block. -->
 <main class="card">
   <p class="eyebrow">{{TOPIC}} · 한 입 {{NN}}</p>
   <h1>{{CONCEPT TITLE}}</h1>
 
-  <!-- never-vague 1/3: a jargon-free definition. <dfn> inside .sg-def is the definition anchor. -->
+  <!-- BEAT 1 - ease in: the FIRST thing the learner reads. An everyday anchor they cannot get wrong,
+       zero jargon. Name the term only AFTER this lands (show, then name). -->
+  <section class="sg-anchor">
+    <p class="lead">익숙한 것에서 시작</p>
+    <p>{{친숙한 일상 닻 — 학습자가 절대 틀릴 수 없는, 전문용어 없는 한 장면이나 한 문장. 정의보다 먼저 온다.}}</p>
+  </section>
+
+  <!-- BEAT 2a - never-vague 1/3: a jargon-free definition, now arriving AFTER the anchor. -->
   <p class="sg-def"><dfn>{{term}}</dfn> — {{전문용어 없이 한두 문장으로 푼 정의}}</p>
 
   <!-- jargon unpacked: every term named above gets a plain gloss before it is leaned on. -->
@@ -24,14 +32,33 @@
     <dt>{{jargon term}}</dt><dd>{{쉬운 말 풀이}}</dd>
   </dl>
 
-  <!-- never-vague 2/3: ONE concrete, REAL worked example -- a solved instance, not an analogy. -->
+  <!-- BEAT 2b - never-vague 2/3: ONE concrete, REAL worked example -- a solved instance, not an analogy.
+       For SPATIAL / structural content (arrays, sequences, flows), render it as an inline diagram (boxes
+       + arrows + labels), NOT a paragraph -- the .arr component in lesson.css handles sequences and state
+       transitions; build ad-hoc box-and-arrow markup for trees/flows. "Show, don't tell": a two-pointer
+       scan reads instantly as boxes with R/W tags where the same steps as prose are a wall. This is the
+       reference instance; the learner still draws their OWN in the activity (make-don't-watch). -->
   <h2>예를 들어</h2>
   <div class="callout worked">
-    <p>{{손으로 따라갈 수 있는 구체 예시 한 개 — 실제 값/객체/단계}}</p>
+    <p>{{구체 예시 한 개 — 공간/구조 내용이면 아래처럼 박스+화살표 다이어그램으로}}</p>
+    <div class="viz">
+      <div class="arr">
+        <div class="cell"><span class="ptrs"><span class="ptr w">W</span></span><b class="zero">0</b></div>
+        <div class="cell"><span class="ptrs"><span class="ptr r">R</span></span><b class="hot">1</b></div>
+        <div class="cell"><b class="zero">0</b></div>
+        <div class="cell"><b>3</b></div>
+      </div>
+      <span class="arr-sep"><b>→</b></span>
+      <div class="arr">
+        <div class="cell"><b>1</b></div>
+        <div class="cell"><b>3</b></div>
+        <div class="cell"><b class="zero">0</b></div>
+      </div>
+    </div>
   </div>
 
   <!-- ============================================================
-       THE ACTIVITY (active-engagement): the learner MAKES this, not consumes it.
+       BEAT 3 - THE ACTIVITY (active-engagement): the learner MAKES this, not consumes it.
        Pick ONE channel and keep its block; delete the others.
        channel ∈ visual | auditory | narrative | kinesthetic | humor
        ============================================================ -->
@@ -82,13 +109,21 @@
     <p class="activity-why">왜: 웃기고 의외인 것은 기억에 튑니다(기이성·폰 레스토르프 효과).</p>
   </section>
 
+  <!-- BEAT 4 - never-vague 3/3: the own-words restatement prompt. STATIC -> lives ON the card with the
+       rest of the material. The reactive one-gap follow-up stays terminal-only (it depends on the answer). -->
+  <section class="sg-ask">
+    <p class="lead">네 말로 다시</p>
+    <p class="sg-q">{{이 개념을 본인 말로 다시 설명하라고 요구하는 질문 — session-claims.json 의 restatementPrompt}}</p>
+    <p class="activity-why">왜: 직접 떠올려 말해야 진짜로 남는다(생성 효과). 대답은 터미널에 적어 줘 — 그러면 한 간격씩 채점해 줄게.</p>
+  </section>
+
   <!-- common misconception this bite clears up -->
   <p class="callout later"><strong>흔한 오해:</strong> {{자주 헷갈리는 지점}}</p>
 
   <footer>
     <!-- keep the source line ONLY when the concept is factual:true; point at the facts.json url. -->
     <p class="cite">출처: <a href="{{URL}}">{{권위 있는 출처 — facts.json}}</a></p>
-    <p><strong>이제 터미널로:</strong> 본인 말로 다시 설명할 차례입니다. 질문 · 채점 · 응원은 모두 터미널에서 진행합니다. 통과하면 마을에 블록이 하나 올라갑니다.</p>
+    <p><strong>대답은 터미널로:</strong> 위 질문에 네 말로 답하면, 한 간격씩 채점하고 응원해 줄게. 통과하면 마을에 블록이 하나 올라간다.</p>
   </footer>
 </main>
 </body>

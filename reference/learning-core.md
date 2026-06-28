@@ -27,6 +27,14 @@ left half, check 9, drop the right half, land on 7 - three checks, not six" is a
 three into `session-claims.json` every bite; an analogy is allowed *in addition*, tagged `type:analogy`,
 never *instead*.
 
+When the concept is spatial, structural, or relational (an array, a sequence, a tree, a flow, a circuit),
+render the worked example as an inline diagram in the card - boxes for the parts, arrows/labels for the
+relations - not a paragraph of text. "Show, don't tell" at the visual level: a two-pointer scan reads
+instantly as boxes with R/W tags and an arrow between states, where the same steps written as prose are a
+wall. The `.arr` component in `lesson.css` handles sequences/arrays and state transitions; build ad-hoc
+box-and-arrow markup for trees and flows. The diagram is the reference instance (the solved case) - the
+learner still produces their OWN drawing in the activity, so this does not weaken make-don't-watch.
+
 ## Make, don't watch (the flagship)
 
 You remember what you generate, not what you receive. So every bite hands the learner ONE sensory activity
@@ -76,6 +84,12 @@ before the mechanism ever had a chance.
 
 This is a teaching default, not a gate line (the gate cannot measure "easy"); but a bite that opens on
 jargon and a hard ask is a coaching defect even when it clears the gate.
+
+- **The card opens on the anchor, not the definition.** Ease-in is now structural: the activity card
+  (`material/activity-NN.html`) is paced in four beats and its FIRST beat is the everyday thing the learner
+  cannot get wrong, with the `definition` arriving second. A card that leads with `<dfn>` and the formal
+  term fights the rule even when the prose elsewhere says "start easy" - the first thing the learner reads
+  is what sets the difficulty.
 
 ## Mix the senses; never type the learner
 

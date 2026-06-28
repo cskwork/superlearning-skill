@@ -86,8 +86,9 @@ cards) and `world/world.html` (the reward town). **No vault, no gate, no honest 
 3. **Source** (researcher; only if the bite states an external fact). Verify it into `facts.json` with a
    URL; unverifiable -> documented placeholder, never an invented fact. Skip for pure-reasoning bites.
 4. **Teach the bite** (coach). Deliver definition + worked example and attach ONE sensory activity the
-   learner MAKES. By default render it to a `material/activity-NN.html` card; the restatement prompt and
-   grading stay in the terminal.
+   learner MAKES. By default render it to a `material/activity-NN.html` card that carries the familiar
+   anchor + definition + worked example + the activity + the static restatement prompt; the terminal keeps
+   only the learner's answer and the reactive one-gap grading.
 5. **Produce + grade** (coach). The learner makes the artifact and says the idea back in their own words.
    Name the FIRST gap by the 6-type rubric, return exactly one friendly follow-up question, and cheer real
    progress. Loop within the bite until gap-free.

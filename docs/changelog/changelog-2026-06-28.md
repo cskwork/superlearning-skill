@@ -117,3 +117,83 @@ consumes - DRAW it ...`, reusing the ` - ` separator the description already use
 remains. Verified with a strict PyYAML `safe_load` (parses clean, two keys) and the frontmatter gate
 (combined 964/1536). The README/landing copies of the description are prose, not YAML, so they need no
 change.
+
+## Amendment - card paced in four beats: ease-in anchor + restatement-on-card (same day)
+
+Trigger: a live learner hit the first bite of `move-zeroes` and said the card was "too hard" - it opened on
+the formal definition (`<dfn>쓰는 손가락 기법</dfn> ...`) before any familiar ground, and the say-back
+question lived only in the terminal, so the card was not a self-contained study unit. The skill already had
+"start easy; ease in from the familiar" as a coaching principle, but the card TEMPLATE led with `.sg-def`,
+giving the ease-in rule nowhere to land structurally - the structure defeated the principle. The user asked
+to bake "difficulty always starts easy" into the skill.
+
+Change A - ease-in is now structural, not just prose:
+
+- `templates/teach/assets/activity-card.html` - re-laid into FOUR beats: (1) a familiar anchor the learner
+  cannot get wrong (everyday, zero jargon, the FIRST thing read) -> (2) the jargon-free definition +
+  concrete worked example -> (3) ONE sensory activity the learner makes -> (4) the own-words restatement
+  prompt. New `.sg-anchor` opener and `.sg-ask` closer blocks; the definition now arrives AFTER the anchor.
+- `templates/teach/assets/lesson.css` - two small token-reusing rules for `.sg-anchor` (warm `--ok` styling,
+  "you already know this") and `.sg-ask` (accent styling for the action item). No new dependencies.
+- `reference/learning-core.md` - new bullet under ease-in: "the card opens on the anchor, not the
+  definition"; a card that leads with `<dfn>` fights the rule even if the prose says "start easy."
+
+Change B - the static restatement prompt moves onto the card (the terminal keeps only the reactive grading):
+
+- `SKILL.md` (Output & delivery, step 4, Done=), `reference/workspace.md` (Live activity cards),
+  `agents/learning-coach.md` (step 4), and all five channel references (`draw/compose/roleplay/move/joke`)
+  + both READMEs + the landing `docs/index.html` - the static `restatementPrompt` now rides on the card; the
+  terminal keeps only the learner's typed answer and the REACTIVE one-gap follow-up. Rationale: the
+  restatement prompt is teaching material, and material lives on the card; the reactive follow-up must stay
+  terminal because it depends on the learner's answer.
+
+Reasoning: the card is the study artifact, so it should be paced like one - open on ground the learner
+stands on, reach the formal term only after the mechanism is felt, and close on the say-back that drives the
+generation effect. Splitting static (card) from reactive (terminal) keeps each surface doing one job. This
+is delivery-only: cards remain live-turn artifacts that are NOT gated, the `session-claims.json` schema and
+the five sub-gates are unchanged, and ease-in stays a coaching default, not a gate line ("easy" is judgment,
+not a deterministic check). Rejected alternative: gate-check that the card leads with an anchor - rejected
+as unmeasurable and prone to false fails, exactly as the earlier ease-in amendment decided.
+
+Verification: `bash tests/run-all.sh` - frontmatter+size gate PASS, gate pass/fail scenarios PASS (clean
+vault green, broken vault red with all five sub-gates firing), mode-routing PASS, reference-links contract
+satisfied (all SKILL.md-referenced files resolve; the suite's `mapfile` call is a bash-4 feature absent on
+macOS bash 3.2 and is a pre-existing environment limitation, not introduced here). The deterministic gate is
+unchanged, so the existing test suite still governs.
+
+## Amendment - visual worked examples: show spatial content as a diagram, not prose (same day)
+
+Trigger: a live learner said the four-beat card was still "too much text" ("글 보다는 좀 더 시각적으로").
+The worked example for `move-zeroes` was a `<ul class="trace">` of five prose lines ("1번 칸 = 1 -> w 자리로
+당겨 ..."), where the same content reads instantly as boxes with R/W pointer tags. The skill had no guidance
+that a worked example should be a picture when the content is spatial.
+
+Change - "show, don't tell" extended to the visual level:
+
+- `templates/teach/assets/lesson.css` - a reusable inline-diagram component: `.viz` (flex container),
+  `.arr` + `.cell` + `.ptr` (a sequence/array with colored pointer tags that drop a ▼ onto a cell),
+  `.arr-sep` (arrow between two states), `.mini` (caption). Covers sequences/arrays and state transitions -
+  the bulk of spatial content (two-pointers, sliding window, sorting, stacks). Trees/flows use ad-hoc
+  box-and-arrow markup that reuses the surface tokens.
+- `templates/teach/assets/activity-card.html` - the BEAT 2b worked-example slot now ships an example
+  diagram (boxes + a `->` state transition) and a comment stating the rule: spatial content renders as an
+  inline diagram, not a paragraph.
+- `reference/learning-core.md` - new always-on rule: when the concept is spatial/structural/relational,
+  the worked example is an inline diagram (boxes + arrows/labels). Explicit that this is the reference
+  instance and does NOT weaken make-don't-watch (the learner still draws their own in the activity).
+- `reference/workspace.md` + `reference/draw.md` + `SKILL.md` - the same rule, scoped: workspace points at
+  the `.arr` component; draw.md adds the sharp distinction (the shown worked-example diagram is allowed;
+  handing the learner that same finished diagram as the ACTIVITY never is).
+
+Reasoning: a worked example is the solved case the learner is allowed to see, so rendering it as a diagram
+is legitimate and strictly more legible for spatial content. The make-don't-watch flagship is preserved
+because the diagram is the REFERENCE instance and the learner still PRODUCES their own drawing in the
+activity - two distinct visual layers (one shown, one made). Conditional on content shape (spatial), not
+universal - a grammatical rule stays prose. Rejected: forcing every worked example into a diagram - some
+concepts are textual and a diagram would be decoration.
+
+Verification: `bash tests/run-all.sh` - frontmatter+size gate PASS, gate pass/fail scenarios PASS, mode-
+routing PASS, reference-links satisfied. The `.arr` component is presentation only (not read by the gate),
+and the `session-claims.json` schema and five sub-gates are unchanged. The live `move-zeroes` vault card was
+rebuilt to use the shared `.arr` classes (inline `<style>` dropped) after refreshing the vault's
+`assets/lesson.css`; `engagement-gate.mjs` on the vault stays green.

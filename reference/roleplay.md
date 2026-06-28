@@ -75,9 +75,9 @@ destination using only its own local table, never the whole map).
    who owns the rule re-reads the table and re-routes. This separates understanding from recall.
 
 6. **Win the scene, then ship the say-back.** When the packet reaches its destination by clean rule-use,
-   the scene is won. Hand over the `restatementPrompt` in the terminal: *"In your own words, why can a
-   packet reach D even though router A has no idea what the full path looks like?"* Grade that say-back one
-   gap at a time (the 6-type rubric in `learning-core.md`).
+   the scene is won. Put the `restatementPrompt` on the card: *"In your own words, why can a packet reach D
+   even though router A has no idea what the full path looks like?"* In the terminal take the learner's
+   answer and grade it one gap at a time (the 6-type rubric in `learning-core.md`).
 
 Throughout, the never-vague triple still ships: the rule was the `definition`, the A->B->D turn was the
 `workedExample`, and step 6 is the `restatementPrompt`. The story carried them; it did not replace them.
@@ -91,10 +91,10 @@ The danger of a good story is that it entertains without teaching. Two guardrail
   engagement-critic flags "fun but does not exercise the concept." Build the world so the only key that
   opens the next door is the idea itself (here: you literally cannot proceed without choosing a valid next
   hop). Costumes and names are free; the decision must be load-bearing.
-- **The say-back stays in the terminal.** The card can render the world and the worked turn, but the
-  restatement prompt, the learner's own-words answer, and the one-gap grading happen live in the
-  terminal - that is where you find out whether the hero actually learned the rule or just enjoyed the
-  ride. A clean scene with no graded say-back is an unfinished bite.
+- **The restatement prompt is on the card.** The card renders the world, the worked turn, and the static
+   `restatementPrompt`; the learner's own-words answer and the reactive one-gap grading happen live in the
+   terminal - that is where you find out whether the hero actually learned the rule or just enjoyed the
+   ride. A clean scene with no graded say-back is an unfinished bite.
 
 A strong sign you got it right: the learner, unprompted, applies the rule to a case you never scripted
 ("so if B's cable died too, I'd check A's table for the next-best neighbor, right?"). That unprompted
@@ -140,10 +140,10 @@ Topic: computer networking. Bite: next-hop forwarding. Channel: narrative.
 3. Worked turn shown: A's table -> B; B's table -> D; arrived in two hops, A never saw B's table.
 4. Learner plays a fresh start (A -> C), choosing each hop and justifying it; the coach narrates; a downed
    link forces a re-route to probe the boundary.
-5. Say-back in the terminal: "Why does A not need the whole map?" Learner: "Because each router only has to
-   know the next step, and the next router knows the step after that." Gap check: clear cause ->
-   `gapType:"none"`. They add, unprompted, "and if a link dies, the table just points somewhere else" -
-   transfer.
+5. The card poses the say-back: "Why does A not need the whole map?" In the terminal the learner answers:
+   "Because each router only has to know the next step, and the next router knows the step after that." Gap
+   check: clear cause -> `gapType:"none"`. They add, unprompted, "and if a link dies, the table just points
+   somewhere else" - transfer.
 
 The `session-claims.json` payload for the bite:
 
