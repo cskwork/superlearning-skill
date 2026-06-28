@@ -1,0 +1,37 @@
+{
+  "learner": "alex",
+  "topic": "binary-search",
+  "xp": 640,
+  "streak": 7,
+  "masteredConcepts": [
+    { "id": "halving-the-search", "mastered": true, "retrievalPassed": true, "channel": "visual" },
+    { "id": "why-sorted-matters", "mastered": true, "retrievalPassed": true, "channel": "narrative" },
+    { "id": "log-n-steps", "mastered": true, "retrievalPassed": true, "channel": "kinesthetic" },
+    { "id": "midpoint-overflow", "mastered": true, "retrievalPassed": true, "channel": "humor" },
+    { "id": "recursion-vs-loop", "mastered": true, "retrievalPassed": true, "channel": "auditory" }
+  ],
+  "world": {
+    "tier": "village",
+    "blocks": [
+      { "id": "b1", "conceptId": "halving-the-search", "kind": "floor", "earned": true },
+      { "id": "b2", "conceptId": "halving-the-search", "kind": "lamp", "earned": true },
+      { "id": "b3", "conceptId": "why-sorted-matters", "kind": "floor", "earned": true },
+      { "id": "b4", "conceptId": "why-sorted-matters", "kind": "door", "earned": true },
+      { "id": "b5", "conceptId": "why-sorted-matters", "kind": "tree", "earned": true },
+      { "id": "b6", "conceptId": "log-n-steps", "kind": "floor", "earned": true },
+      { "id": "b7", "conceptId": "log-n-steps", "kind": "lamp", "earned": true },
+      { "id": "b8", "conceptId": "midpoint-overflow", "kind": "floor", "earned": true },
+      { "id": "b9", "conceptId": "midpoint-overflow", "kind": "shop", "earned": true },
+      { "id": "b10", "conceptId": "recursion-vs-loop", "kind": "floor", "earned": true },
+      { "id": "b11", "conceptId": "recursion-vs-loop", "kind": "tree", "earned": true },
+      { "id": "b12", "conceptId": "next-concept-here", "kind": "floor", "earned": false }
+    ]
+  },
+  "concepts": [
+    { "id": "halving-the-search", "title": "Halving the search", "channel": "visual", "oneLine": "Check the middle, throw away the impossible half, repeat." },
+    { "id": "why-sorted-matters", "title": "Why sorted matters", "channel": "narrative", "oneLine": "Only a sorted list lets you trust that a whole half can be skipped." },
+    { "id": "log-n-steps", "title": "Why it takes log2(n) steps", "channel": "kinesthetic", "oneLine": "Each step halves what's left, so 1000 items take ~10 checks." },
+    { "id": "midpoint-overflow", "title": "The midpoint overflow trap", "channel": "humor", "oneLine": "(low+high) can overflow; use low + (high-low)/2 instead." },
+    { "id": "recursion-vs-loop", "title": "Recursion vs loop", "channel": "auditory", "oneLine": "Same halving, written two ways; the loop saves stack space." }
+  ]
+}

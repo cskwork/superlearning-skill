@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>내 학습 마을 - /superlearning</title>
+  <link rel="stylesheet" href="world.css">
+</head>
+<body>
+<!-- The reward world. It renders progress-state.json as a growing isometric town:
+     one building per mastered concept, climbing plot -> room -> house -> village -> city.
+     Click a building to recall the concept it stands for (the town is a memory palace).
+
+     DATA: world.js reads the inline <script id="world-data"> below first, so this page
+     renders when opened straight from disk. When you copy templates/world/ into a vault's
+     world/ folder, replace the inline JSON with the learner's live progress (or delete it
+     and let world.js fetch ../progress-state.json over http). Keep .world-stage and
+     .world-summary -- the gate checks for both (the world must be readable, not only drawn). -->
+<div class="world-shell">
+
+  <header class="world-head">
+    <h1>내 학습 마을 · <span class="topic">내 마을</span></h1>
+    <div class="world-stats">
+      <span class="stat-chip tier">단계 <b>Plot</b></span>
+      <span class="stat-chip">건물 <b data-stat-buildings>0</b></span>
+      <span class="stat-chip">XP <b data-stat-xp>0</b></span>
+      <span class="stat-chip">연속 <b data-stat-streak>0</b>일</span>
+    </div>
+  </header>
+
+  <div class="world-stage" role="img" aria-label="학습 진행도를 보여주는 아이소메트릭 마을. 자세한 내용은 아래 마을 현황 참고.">
+    <canvas></canvas>
+  </div>
+
+  <section class="world-panel" aria-live="polite">
+    <p class="ph">건물을 누르면 그곳에서 배운 개념이 나옵니다. 기억만으로 먼저 떠올려 보세요.</p>
+  </section>
+
+  <section class="world-summary" aria-label="마을 현황 텍스트 요약">
+    <h2>마을 현황</h2>
+    <p class="empty">아직 빈 땅입니다.</p>
+  </section>
+
+</div>
+
+<!-- demo progress so the template renders on its own; replace with the learner's state in a vault -->
+<script type="application/json" id="world-data">
+{
+  "learner": "alex",
+  "topic": "binary-search",
+  "xp": 640,
+  "streak": 7,
+  "masteredConcepts": [
+    { "id": "halving-the-search", "mastered": true, "retrievalPassed": true, "channel": "visual" },
+    { "id": "why-sorted-matters", "mastered": true, "retrievalPassed": true, "channel": "narrative" },
+    { "id": "log-n-steps", "mastered": true, "retrievalPassed": true, "channel": "kinesthetic" },
+    { "id": "midpoint-overflow", "mastered": true, "retrievalPassed": true, "channel": "humor" },
+    { "id": "recursion-vs-loop", "mastered": true, "retrievalPassed": true, "channel": "auditory" }
+  ],
+  "world": {
+    "tier": "village",
+    "blocks": [
+      { "id": "b1", "conceptId": "halving-the-search", "kind": "floor", "earned": true },
+      { "id": "b2", "conceptId": "halving-the-search", "kind": "lamp", "earned": true },
+      { "id": "b3", "conceptId": "why-sorted-matters", "kind": "floor", "earned": true },
+      { "id": "b4", "conceptId": "why-sorted-matters", "kind": "door", "earned": true },
+      { "id": "b5", "conceptId": "why-sorted-matters", "kind": "tree", "earned": true },
+      { "id": "b6", "conceptId": "log-n-steps", "kind": "floor", "earned": true },
+      { "id": "b7", "conceptId": "log-n-steps", "kind": "lamp", "earned": true },
+      { "id": "b8", "conceptId": "midpoint-overflow", "kind": "floor", "earned": true },
+      { "id": "b9", "conceptId": "midpoint-overflow", "kind": "shop", "earned": true },
+      { "id": "b10", "conceptId": "recursion-vs-loop", "kind": "floor", "earned": true },
+      { "id": "b11", "conceptId": "recursion-vs-loop", "kind": "tree", "earned": true }
+    ]
+  },
+  "concepts": [
+    { "id": "halving-the-search", "title": "절반 버리기", "channel": "visual", "oneLine": "가운데를 확인하고, 불가능한 절반을 버리고, 반복한다." },
+    { "id": "why-sorted-matters", "title": "정렬이 중요한 이유", "channel": "narrative", "oneLine": "정렬된 목록이라야 한쪽 절반을 통째로 건너뛰어도 안전하다." },
+    { "id": "log-n-steps", "title": "왜 log2(n)번인가", "channel": "kinesthetic", "oneLine": "매번 절반으로 줄어드니 1000개도 약 10번이면 끝난다." },
+    { "id": "midpoint-overflow", "title": "중간값 오버플로 함정", "channel": "humor", "oneLine": "(low+high)는 넘칠 수 있으니 low + (high-low)/2 를 쓴다." },
+    { "id": "recursion-vs-loop", "title": "재귀 대 반복", "channel": "auditory", "oneLine": "같은 절반 버리기를 두 방식으로; 반복문은 스택을 아낀다." }
+  ]
+}
+</script>
+<script src="world.js"></script>
+</body>
+</html>

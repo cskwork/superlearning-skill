@@ -1,0 +1,169 @@
+/*
+  /superlearning reward world -- stylesheet for world.html.
+  A growing isometric settlement that renders progress-state.json: every concept the learner
+  masters places a building, and the town climbs plot -> room -> house -> village -> city.
+  No dependencies, no image assets (the canvas draws every block as an isometric prism).
+  The world doubles as a memory palace: each building is tagged with the concept it stands for,
+  so the spatial layout is itself a recall cue. WCAG: a readable .world-summary mirrors the canvas.
+*/
+
+:root {
+  color-scheme: light dark;
+  --font-ui: ui-sans-serif, system-ui, -apple-system, "Segoe UI", "Noto Sans KR", "Malgun Gothic", sans-serif;
+  --font-mono: ui-monospace, "Cascadia Code", Consolas, monospace;
+
+  --bg: #eaf3ff;
+  --sky-top: #bfe0ff;
+  --sky-bot: #eef7ff;
+  --panel: #ffffff;
+  --ink: #16202c;
+  --ink-soft: #5b6b7a;
+  --line: #d4e2f0;
+  --accent: #f0a429;
+  --accent-ink: #2a1c05;
+  --good: #2f9e57;
+  --shadow: 0 1px 2px rgba(20, 32, 44, 0.08), 0 10px 30px rgba(20, 32, 44, 0.12);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0c1016;
+    --sky-top: #16243a;
+    --sky-bot: #0c1016;
+    --panel: #141a22;
+    --ink: #e8eef5;
+    --ink-soft: #9fb0c2;
+    --line: #25303d;
+    --accent: #f0b54a;
+    --accent-ink: #2a1c05;
+    --good: #5fd08c;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 12px 36px rgba(0, 0, 0, 0.45);
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: linear-gradient(180deg, var(--sky-top), var(--sky-bot));
+  color: var(--ink);
+  font-family: var(--font-ui);
+  -webkit-font-smoothing: antialiased;
+}
+
+.world-shell {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: clamp(14px, 3vw, 28px);
+  display: grid;
+  gap: 16px;
+}
+
+/* header: title + the live counters */
+.world-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.world-head h1 {
+  margin: 0;
+  font-size: clamp(1.3rem, 1rem + 1.6vw, 2rem);
+  letter-spacing: -0.02em;
+}
+.world-head .topic { color: var(--accent); }
+
+.world-stats { display: flex; gap: 8px; flex-wrap: wrap; }
+.stat-chip {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 7px 14px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  box-shadow: var(--shadow);
+  display: inline-flex;
+  gap: 6px;
+  align-items: baseline;
+}
+.stat-chip b { font-family: var(--font-mono); color: var(--accent); font-size: 1rem; }
+.stat-chip.tier b { color: var(--good); text-transform: capitalize; }
+
+/* the canvas stage */
+.world-stage {
+  position: relative;
+  background:
+    radial-gradient(120% 90% at 50% 0%, rgba(255, 255, 255, 0.35), transparent 60%),
+    var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  min-height: 420px;
+}
+.world-stage canvas { display: block; width: 100%; height: 100%; }
+
+/* the celebratory banner when a new block just landed */
+.world-toast {
+  position: absolute;
+  top: 14px; left: 50%;
+  transform: translateX(-50%);
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 8px 16px;
+  border-radius: 999px;
+  box-shadow: var(--shadow);
+  animation: pop 0.5s cubic-bezier(0.2, 0.9, 0.3, 1.4);
+}
+@keyframes pop { from { transform: translateX(-50%) scale(0.6); opacity: 0; } }
+
+/* the memory-palace recall panel (click a building) */
+.world-panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--accent);
+  border-radius: 12px;
+  padding: 14px 18px;
+  box-shadow: var(--shadow);
+  min-height: 60px;
+}
+.world-panel .ph { color: var(--ink-soft); margin: 0; }
+.world-panel h2 { margin: 0 0 6px; font-size: 1.05rem; }
+.world-panel .channel {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 2px 7px;
+  margin-bottom: 6px;
+}
+.world-panel p { margin: 4px 0 0; color: var(--ink-soft); font-size: 0.92rem; }
+
+/* the accessible text mirror of the scene -- progress is readable, not only drawn */
+.world-summary {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 14px 18px;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  box-shadow: var(--shadow);
+}
+.world-summary h2 { margin: 0 0 6px; font-size: 0.95rem; color: var(--ink); }
+.world-summary ul { margin: 6px 0 0; padding-left: 18px; }
+.world-summary li { margin: 2px 0; }
+.world-summary .empty { font-style: italic; }
+
+:where(a, button, [tabindex]):focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.001ms !important; }
+}

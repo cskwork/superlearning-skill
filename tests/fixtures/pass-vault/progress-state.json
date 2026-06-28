@@ -1,0 +1,27 @@
+{
+  "learner": "alex",
+  "topic": "binary-search",
+  "delivery": "html-card",
+  "xp": 120,
+  "streak": 3,
+  "masteredConcepts": [
+    {
+      "id": "halving-the-search",
+      "mastered": true,
+      "retrievalPassed": true,
+      "channel": "visual",
+      "reteachHistory": []
+    }
+  ],
+  "world": {
+    "tier": "room",
+    "blocks": [
+      { "id": "b1", "conceptId": "halving-the-search", "kind": "floor", "earned": true },
+      { "id": "b2", "conceptId": "halving-the-search", "kind": "lamp", "earned": true }
+    ]
+  },
+  "reviewSchedule": [
+    { "conceptId": "halving-the-search", "due": "1d" },
+    { "conceptId": "halving-the-search", "due": "1w" }
+  ]
+}

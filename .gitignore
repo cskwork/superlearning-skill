@@ -1,0 +1,13 @@
+# runtime learner vaults are personal data -- never committed (templates/ holds the seed)
+.superlearning/
+
+# os / editor cruft
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+
+# node
+node_modules/
+npm-debug.log*

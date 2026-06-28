@@ -1,0 +1,44 @@
+{
+  "topic": "binary-search",
+  "concepts": [
+    {
+      "id": "halving-the-search",
+      "definition": "Binary search finds an item in a sorted list by checking the middle one and throwing away the half that cannot contain the target, then repeating on what is left.",
+      "jargonTerms": ["sorted list", "target"],
+      "unpacked": {
+        "sorted list": "items already in order, smallest to largest",
+        "target": "the value you are trying to find"
+      },
+      "workedExample": {
+        "type": "worked",
+        "content": "Find 7 in [1,3,5,7,9,11]. Middle is 5; 7>5 so drop the left half, leaving [7,9,11]. Middle is 9; 7<9 so drop the right half, leaving [7]. Found in 3 checks, not 6."
+      },
+      "restatementPrompt": "In your own words, why does checking the middle let you throw away half the list every single time?",
+      "factual": false
+    }
+  ],
+  "gradings": [
+    {
+      "conceptId": "halving-the-search",
+      "gapType": "boundary",
+      "followUpQuestion": "What has to be true about the list for the half you discard to be safe to ignore?"
+    }
+  ],
+  "activities": [
+    {
+      "conceptId": "halving-the-search",
+      "channel": "visual",
+      "produced": true,
+      "retrievalRole": "learner draws the shrinking range as boxes and crosses out the discarded half at each step",
+      "artifact": "material/activity-01.html",
+      "prompt": "Draw the list as six boxes. Circle the middle, cross out the half that cannot hold 7, redraw what is left, and repeat until one box remains."
+    },
+    {
+      "conceptId": "halving-the-search",
+      "channel": "humor",
+      "produced": true,
+      "retrievalRole": "learner writes a punchline that only lands if each guess really does halve the space",
+      "prompt": "Make a POW! one-liner about a detective who always questions the middle suspect in the lineup first. Why is the detective so fast?"
+    }
+  ]
+}

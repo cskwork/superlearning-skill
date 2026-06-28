@@ -1,0 +1,12 @@
+{
+  "topic": "broken-on-purpose",
+  "masteredConcepts": [
+    { "id": "ghost-concept", "mastered": true }
+  ],
+  "world": {
+    "tier": "metropolis",
+    "blocks": [
+      { "id": "x1", "conceptId": "ghost-concept", "kind": "floor", "earned": true }
+    ]
+  }
+}

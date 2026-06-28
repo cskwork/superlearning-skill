@@ -1,0 +1,5 @@
+# keep line endings stable across OSes so the node gate and shell tests match
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.gif binary

@@ -1,0 +1,19 @@
+{
+  "topic": "broken-on-purpose",
+  "concepts": [
+    {
+      "id": "circular-thing",
+      "definition": "circular thing",
+      "jargonTerms": ["alpha", "beta", "gamma", "delta", "epsilon"],
+      "workedExample": { "type": "analogy", "content": "it is sort of like a thing" },
+      "restatementPrompt": "Say it back.",
+      "factual": true
+    }
+  ],
+  "gradings": [
+    { "conceptId": "circular-thing", "gapType": "causal", "followUpQuestion": "Why does it happen? And how? And when would it not?" }
+  ],
+  "activities": [
+    { "conceptId": "circular-thing", "channel": "telepathy", "produced": false, "retrievalRole": "" }
+  ]
+}

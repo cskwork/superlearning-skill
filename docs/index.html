@@ -1,0 +1,661 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>/superlearning - learn with all five senses, bite by bite</title>
+<meta name="description" content="A Claude Code skill that makes any subject stick - through five sensory channels, bite-size pieces, and a reward town that grows as you learn. Behind a gate with no self-approval.">
+<meta property="og:title" content="/superlearning - learn with all five senses, bite by bite">
+<meta property="og:description" content="You remember what you MAKE. Every bite: a plain definition, a concrete worked example, an own-words restatement - plus one sensory activity you produce yourself. Blocks build a town that doubles as a memory palace.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%235EC8FF'/%3E%3Ctext x='16' y='23' font-family='system-ui,sans-serif' font-size='17' font-weight='700' text-anchor='middle' fill='%230A0B10'%3EL%3C/text%3E%3C/svg%3E">
+<style>
+  :root{
+    --bg:#0A0B10; --glass:rgba(16,18,26,.60); --glass-strong:rgba(16,18,26,.85);
+    --ink:#F4F3F0; --body:#D2D1CC; --muted:#9B9890; --soft:#78766E;
+    --line:rgba(244,243,240,.09); --line-strong:rgba(244,243,240,.16);
+    --accent:#5EC8FF; --accent-deep:#2AA8E8; --accent-soft:rgba(94,200,255,.13);
+    --accent-ink:#04111B;
+    --green:#73EFBA; --green-deep:#4DD4A0; --green-soft:rgba(115,239,186,.13);
+    --red:#FF8B8B; --red-soft:rgba(255,139,139,.12);
+    --draw:#FF6B6B; --draw-soft:rgba(255,107,107,.13);
+    --compose:#FFD166; --compose-soft:rgba(255,209,102,.13);
+    --roleplay:#73EFBA; --roleplay-soft:rgba(115,239,186,.13);
+    --move:#7FC8F8; --move-soft:rgba(127,200,248,.13);
+    --joke:#FF85A1; --joke-soft:rgba(255,133,161,.13);
+    --hl:rgba(244,243,240,.13); --hl-soft:rgba(244,243,240,.05);
+    --shadow:0 16px 48px rgba(4,6,14,.55);
+    --ease:cubic-bezier(.16,1,.3,1);
+    --r-card:18px; --r-term:14px;
+    --maxw:1180px; --fs:1;
+    --sans:ui-sans-serif,system-ui,-apple-system,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+    --mono:ui-monospace,"SF Mono","JetBrains Mono",Consolas,"Liberation Mono",Menlo,monospace;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth;background:var(--bg)}
+  body{
+    margin:0;min-width:320px;background:var(--bg);color:var(--body);
+    font-family:var(--sans);font-size:calc(16px * var(--fs));line-height:1.6;
+    -webkit-font-smoothing:antialiased;padding-bottom:104px;overflow-x:hidden;
+  }
+
+  /* Language: .en / .ko spans toggled by html[lang]; default en. */
+  html[lang="en"] .ko{display:none !important}
+  html[lang="ko"] .en{display:none !important}
+  html[lang="ko"] body{word-break:keep-all}
+  html[lang="ko"] .term pre,html[lang="ko"] .ticker,html[lang="ko"] .ascii{word-break:normal}
+
+  a{color:inherit;text-decoration:none}
+  a:hover{color:var(--accent)}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+  code,kbd,pre,.mono{font-family:var(--mono)}
+  b{color:var(--ink)}
+  .wrap{position:relative;z-index:2;width:min(var(--maxw),calc(100% - 40px));margin:0 auto}
+  .accent{color:var(--accent)}
+  .eyebrow{font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:600}
+  .eyebrow::before{content:"";display:inline-block;width:18px;height:1px;background:var(--accent);vertical-align:middle;margin-right:10px;opacity:.7}
+
+  /* Depth layers: five-color aurora echoing the channel palette. */
+  body::before{
+    content:"";position:fixed;inset:-12%;z-index:-3;pointer-events:none;
+    background:
+      radial-gradient(38% 46% at 12% 6%,rgba(255,107,107,.12),transparent 70%),
+      radial-gradient(44% 44% at 88% 10%,rgba(255,209,102,.10),transparent 70%),
+      radial-gradient(50% 50% at 82% 88%,rgba(115,239,186,.10),transparent 72%),
+      radial-gradient(42% 42% at 14% 90%,rgba(94,200,255,.10),transparent 72%),
+      radial-gradient(34% 34% at 52% 48%,rgba(255,133,161,.07),transparent 68%);
+    filter:saturate(120%);animation:aurora 34s ease-in-out infinite;
+  }
+  @keyframes aurora{0%,100%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(-1.2%,1%,0) scale(1.04)}}
+  body::after{
+    content:"";position:fixed;inset:0;z-index:90;pointer-events:none;opacity:.04;mix-blend-mode:overlay;
+    background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.82" numOctaves="2" stitchTiles="stitch"/></filter><rect width="160" height="160" filter="url(%23n)" opacity="0.55"/></svg>');
+  }
+
+  .glass{
+    background:var(--glass);
+    -webkit-backdrop-filter:blur(22px) saturate(160%);backdrop-filter:blur(22px) saturate(160%);
+    border:1px solid var(--line);
+    box-shadow:inset 0 1px 0 var(--hl),inset 0 -1px 0 rgba(4,6,14,.4),var(--shadow);
+  }
+  @media (prefers-reduced-transparency:reduce){
+    .glass{background:rgba(20,22,30,.97);-webkit-backdrop-filter:none;backdrop-filter:none}
+  }
+
+  /* Glass topbar */
+  .topbar{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:60;width:min(var(--maxw),calc(100% - 32px));border-radius:16px}
+  .top-row{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:10px 14px 10px 18px}
+  .brand{font-weight:700;color:var(--ink);font-size:1.06rem;letter-spacing:-.01em}
+  .brand-word{
+    background:linear-gradient(115deg,var(--compose) 0%,var(--accent) 48%,var(--roleplay) 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .top-right{display:flex;gap:9px;align-items:center}
+  .pill{border:1px solid var(--line);padding:9px 15px;border-radius:999px;color:var(--ink);font-size:.86rem;background:var(--hl-soft);transition:border-color .2s var(--ease),transform .2s var(--ease)}
+  .pill:hover{border-color:rgba(94,200,255,.55);transform:translateY(-1px);color:var(--ink)}
+  .lang{cursor:pointer;font-family:inherit;min-width:78px;text-align:center}
+
+  /* Fixed glass dock with hover magnification */
+  .dock{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);z-index:60;display:flex;gap:4px;padding:6px;border-radius:999px;max-width:calc(100% - 24px)}
+  .dock a{position:relative;padding:11px 17px;border-radius:999px;color:var(--muted);font-size:.9rem;font-weight:500;white-space:nowrap;transition:color .25s var(--ease),transform .3s var(--ease)}
+  .dock a:hover{color:var(--ink);transform:translateY(-3px) scale(1.07)}
+  .dock a:has(+a:hover),.dock a:hover+a{transform:translateY(-1px) scale(1.03)}
+  .dock a.active{color:var(--accent-ink);background:var(--accent);box-shadow:inset 0 1px 0 rgba(220,244,255,.4),0 6px 18px rgba(94,200,255,.3)}
+  @media (max-width:620px){.dock a{padding:10px 10px;font-size:.8rem}.dock{gap:2px;padding:5px}}
+
+  /* Hero */
+  .hero{padding:146px 0 40px;display:grid;grid-template-columns:1.06fr .94fr;gap:54px;align-items:center;min-height:86dvh}
+  .hero h1{font-size:clamp(2.5rem,5.6vw,4.4rem);line-height:1.04;letter-spacing:-.035em;color:var(--ink);margin:.6rem 0 0;font-weight:700;text-wrap:balance}
+  .hero h1 .slash{color:var(--soft)}
+  .hero h1 .hl-word{
+    background:linear-gradient(115deg,var(--compose) 0%,var(--accent) 48%,var(--roleplay) 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .hero p.lede{font-size:1.14rem;color:var(--body);max-width:44ch;margin:1.2rem 0 0}
+  [data-stage]{opacity:0;transform:translateY(18px);animation:rise .85s var(--ease) forwards;animation-delay:calc(var(--i,0) * 110ms)}
+  @keyframes rise{to{opacity:1;transform:none}}
+  .cta-row{display:flex;gap:12px;margin-top:30px;flex-wrap:wrap}
+  .btn{position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:12px 20px;border-radius:13px;font-weight:600;font-size:.95rem;transition:transform .25s var(--ease),box-shadow .25s var(--ease),border-color .2s var(--ease)}
+  .btn-primary{background:var(--accent);color:var(--accent-ink);box-shadow:inset 0 1px 0 rgba(220,244,255,.4),0 8px 24px rgba(94,200,255,.28)}
+  .btn-primary::after{content:"";position:absolute;top:0;bottom:0;left:-60%;width:40%;transform:skewX(-18deg);background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent);transition:left .55s var(--ease)}
+  .btn-primary:hover{transform:translateY(-2px);color:var(--accent-ink)}
+  .btn-primary:hover::after{left:120%}
+  .btn-ghost{color:var(--ink);border:1px solid var(--line);background:var(--hl-soft)}
+  .btn-ghost:hover{transform:translateY(-2px);border-color:rgba(94,200,255,.5)}
+  .cta-note{margin:14px 0 0;font-size:.84rem;color:var(--muted)}
+  .cta-note b{color:var(--body);font-weight:600}
+
+  /* Terminal */
+  .term{border-radius:var(--r-term);overflow:hidden}
+  .term-bar{display:flex;align-items:center;gap:8px;padding:11px 15px;border-bottom:1px solid var(--line)}
+  .dot{width:11px;height:11px;border-radius:50%}
+  .dot.a{background:#e0685f}.dot.b{background:var(--compose)}.dot.c{background:var(--green-deep)}
+  .term-title{margin-left:8px;font-size:.8rem;color:var(--muted);font-family:var(--mono)}
+  .term pre{margin:0;padding:18px;font-family:var(--mono);font-size:calc(.82rem * var(--fs));line-height:1.75;color:var(--body);overflow-x:auto;white-space:pre-wrap}
+  .term .ok{color:var(--green)}.term .bad{color:var(--red)}.term .dim{color:var(--soft)}
+  .term .cy{color:var(--accent)}.term .am{color:var(--compose)}
+  .term .draw-c{color:var(--draw)}.term .roleplay-c{color:var(--roleplay)}
+  .term .move-c{color:var(--move)}.term .joke-c{color:var(--joke)}
+  .tline{display:block;opacity:0;animation:lineIn .01s steps(1) forwards;animation-delay:var(--t,0s)}
+  @keyframes lineIn{to{opacity:1}}
+  .caret::after{content:"";display:inline-block;width:.55em;height:1.05em;margin-left:2px;vertical-align:text-bottom;background:var(--accent);animation:blink 1.1s steps(1) infinite}
+  @keyframes blink{50%{opacity:0}}
+
+  /* Ticker */
+  .ticker-wrap{position:relative;z-index:2;border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;background:rgba(12,14,20,.7)}
+  .ticker{display:flex;gap:0;width:max-content;animation:tick 40s linear infinite}
+  .ticker-wrap:hover .ticker{animation-play-state:paused}
+  @keyframes tick{to{transform:translateX(-50%)}}
+  .ticker span{display:inline-flex;align-items:center;min-height:46px;padding:0 24px;color:var(--muted);font:700 .76rem/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+  .ticker b{color:var(--accent)}
+  .ticker .draw-t{color:var(--draw)}.ticker .compose-t{color:var(--compose)}
+  .ticker .roleplay-t{color:var(--roleplay)}.ticker .move-t{color:var(--move)}.ticker .joke-t{color:var(--joke)}
+
+  /* Sections */
+  section{padding:clamp(58px,8vw,92px) 0;position:relative;z-index:2}
+  section[id]{scroll-margin-top:92px}
+  .sec-head{max-width:60ch}
+  .sec-head h2{font-size:clamp(1.8rem,3.5vw,2.6rem);color:var(--ink);letter-spacing:-.025em;margin:.5rem 0 0;font-weight:700;text-wrap:balance}
+  .sec-head p{color:var(--muted);margin:.8rem 0 0;font-size:calc(1rem * var(--fs))}
+
+  /* Five Senses channel cards */
+  .channels{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:38px}
+  .channel{position:relative;overflow:hidden;border-radius:var(--r-card);padding:26px 20px;border:1px solid transparent;transition:border-color .3s var(--ease),transform .3s var(--ease)}
+  .channel:hover{transform:translateY(-3px)}
+  .channel-label{font:700 .68rem/1 var(--mono);letter-spacing:.18em;text-transform:uppercase;margin-bottom:14px}
+  .channel h3{margin:0 0 8px;color:var(--ink);font-size:1.06rem;letter-spacing:-.015em}
+  .channel p{margin:0;font-size:.88rem;color:var(--muted);line-height:1.55}
+  .channel .makes{margin-top:14px;padding:10px 12px;border-radius:9px;font:.8rem/1.5 var(--mono);background:rgba(10,11,16,.55);color:var(--body)}
+  .channel.draw{background:var(--draw-soft);border-color:rgba(255,107,107,.26)}.channel.draw .channel-label{color:var(--draw)}.channel.draw .makes b{color:var(--draw)}
+  .channel.compose{background:var(--compose-soft);border-color:rgba(255,209,102,.26)}.channel.compose .channel-label{color:var(--compose)}.channel.compose .makes b{color:var(--compose)}
+  .channel.roleplay{background:var(--roleplay-soft);border-color:rgba(115,239,186,.26)}.channel.roleplay .channel-label{color:var(--roleplay)}.channel.roleplay .makes b{color:var(--roleplay)}
+  .channel.move{background:var(--move-soft);border-color:rgba(127,200,248,.26)}.channel.move .channel-label{color:var(--move)}.channel.move .makes b{color:var(--move)}
+  .channel.joke{background:var(--joke-soft);border-color:rgba(255,133,161,.26)}.channel.joke .channel-label{color:var(--joke)}.channel.joke .makes b{color:var(--joke)}
+  @media (max-width:980px){.channels{grid-template-columns:repeat(3,1fr)}}
+  @media (max-width:600px){.channels{grid-template-columns:1fr 1fr}}
+
+  .aside-note{margin-top:28px;padding:18px 20px;border-radius:12px;border:1px solid var(--line);background:var(--hl-soft);font-size:.9rem;color:var(--muted)}
+  .aside-note b{color:var(--body)}
+
+  /* Town section */
+  .town-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(290px,.8fr);gap:44px;align-items:start;margin-top:38px}
+  .tiers{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+  .tier-item{display:flex;align-items:center;gap:14px;padding:14px 18px;border-radius:12px;border:1px solid var(--line);background:rgba(10,11,16,.4);font-size:.93rem}
+  .tier-n{flex:0 0 auto;width:32px;height:32px;border-radius:8px;display:grid;place-items:center;font:.68rem/1 var(--mono);font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+  .tier-n.t1{background:rgba(255,209,102,.18);color:var(--compose)}
+  .tier-n.t2{background:rgba(94,200,255,.18);color:var(--accent)}
+  .tier-n.t3{background:rgba(115,239,186,.18);color:var(--roleplay)}
+  .tier-n.t4{background:rgba(255,107,107,.18);color:var(--draw)}
+  .tier-n.t5{background:rgba(255,133,161,.18);color:var(--joke)}
+  .tier-name{font-weight:600;color:var(--ink);min-width:60px;font-size:.95rem;letter-spacing:-.01em}
+  .tier-desc{color:var(--muted);font-size:.86rem}
+  .town-visual{width:100%;border-radius:var(--r-card);overflow:hidden}
+  .palace-note{margin-top:20px}
+  @media (max-width:860px){.town-layout{grid-template-columns:1fr}}
+
+  /* Loop steps */
+  .loop-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:38px}
+  .step{position:relative;border-radius:var(--r-term);padding:22px 18px}
+  .step .sn{font:700 1.55rem/1 var(--mono);color:var(--accent);opacity:.65;line-height:1;margin-bottom:8px}
+  .step h3{margin:0 0 5px;color:var(--ink);font-size:1rem}
+  .step p{margin:0;font-size:.86rem;color:var(--muted)}
+  .role-badge{position:absolute;top:16px;right:14px;font:.6rem/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--soft);border:1px solid var(--line);border-radius:999px;padding:4px 8px}
+  .role-badge.coach{color:var(--accent);border-color:rgba(94,200,255,.38)}
+  .role-badge.critic{color:var(--green);border-color:rgba(115,239,186,.38)}
+  .role-badge.research{color:var(--compose);border-color:rgba(255,209,102,.38)}
+  .role-badge.learner{color:var(--move);border-color:rgba(127,200,248,.38)}
+  @media (max-width:900px){.loop-steps{grid-template-columns:1fr 1fr}}
+  @media (max-width:520px){.loop-steps{grid-template-columns:1fr}}
+
+  /* Gate section */
+  .gate-layout{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:start;margin-top:38px}
+  .gate-list{list-style:none;padding:4px;margin:0;border-radius:var(--r-term)}
+  .gate-list li{padding:13px 16px;border-bottom:1px solid var(--line);color:var(--body);font-size:.93rem;display:flex;gap:12px;align-items:baseline}
+  .gate-list li:last-child{border-bottom:none}
+  .gate-no{display:inline-grid;place-items:center;flex:0 0 auto;width:24px;height:24px;border-radius:6px;border:1px solid rgba(94,200,255,.38);background:var(--accent-soft);color:var(--accent);font:700 .72rem/1 var(--mono)}
+  .gate-key{color:var(--accent);font-weight:600;white-space:nowrap;font-size:.9rem}
+  .gate-desc{color:var(--muted);display:block;font-size:.84rem;margin-top:2px}
+  @media (max-width:860px){.gate-layout{grid-template-columns:1fr}}
+
+  /* Install section */
+  .install{display:grid;grid-template-columns:minmax(0,1fr) minmax(260px,.52fr);gap:20px;align-items:stretch;margin-top:38px}
+  .install-card{padding:24px;border-radius:var(--r-card)}
+  .install-card h3{margin:0 0 10px;color:var(--ink);font-size:1.14rem;letter-spacing:-.01em}
+  .install-card p{margin:0 0 16px;color:var(--muted);font-size:.92rem}
+  .pill-row{display:flex;flex-wrap:wrap;gap:8px}
+  .tag-pill{border:1px solid var(--line);border-radius:999px;padding:7px 12px;color:var(--muted);background:var(--hl-soft);font:600 .76rem/1 var(--mono)}
+  @media (max-width:860px){.install{grid-template-columns:1fr}}
+
+  footer{margin-top:8px;padding:42px 0 18px;color:var(--muted);font-size:.9rem;position:relative;z-index:2;border-top:1px solid var(--line)}
+  .foot-row{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center}
+  .foot-row b{color:var(--accent)}
+  .foot-note{margin-top:14px;font-size:.83rem;color:var(--soft);max-width:62ch}
+  footer a:hover{color:var(--ink)}
+
+  /* Reveal on scroll */
+  .reveal{opacity:0;transform:translateY(16px);transition:opacity .7s var(--ease),transform .7s var(--ease);transition-delay:var(--d,0s)}
+  .reveal.in{opacity:1;transform:none}
+
+  @media (max-width:900px){
+    .hero{grid-template-columns:1fr;gap:34px;min-height:0;padding-top:124px}
+    .hero p.lede{max-width:58ch}
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important}
+    .reveal{opacity:1;transform:none}
+    [data-stage]{opacity:1;transform:none;animation:none}
+    .tline{opacity:1;animation:none}.caret::after{animation:none}
+    .ticker{animation:none;flex-wrap:wrap;width:auto}
+    body::before{animation:none}
+    .btn-primary::after{display:none}
+    .btn:hover,.pill:hover,.channel:hover,.dock a:hover{transform:none}
+    ::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none !important}
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar glass">
+  <div class="top-row">
+    <div class="brand">super<span class="brand-word">learning</span></div>
+    <div class="top-right">
+      <button id="langToggle" class="pill lang" aria-label="Switch language / 언어 전환"><span class="en">한국어</span><span class="ko">EN</span></button>
+      <a class="pill" href="https://github.com/cskwork/superlearning-skill">GitHub</a>
+    </div>
+  </div>
+</header>
+
+<nav class="dock glass" aria-label="Sections">
+  <a href="#senses" class="dock-link"><span class="en">Senses</span><span class="ko">감각</span></a>
+  <a href="#town" class="dock-link"><span class="en">Town</span><span class="ko">마을</span></a>
+  <a href="#loop" class="dock-link"><span class="en">Loop</span><span class="ko">루프</span></a>
+  <a href="#gate" class="dock-link"><span class="en">Gate</span><span class="ko">게이트</span></a>
+  <a href="#install" class="dock-link"><span class="en">Install</span><span class="ko">설치</span></a>
+</nav>
+
+<main>
+<section class="hero wrap" id="top">
+  <div>
+    <span class="eyebrow" data-stage style="--i:0"><span class="en">Claude Code multi-sensory learning skill</span><span class="ko">Claude Code 다감각 학습 스킬</span></span>
+    <h1 data-stage style="--i:1">
+      <span class="en"><span class="slash">/</span>superlearning: learn so it <span class="hl-word">sticks</span>.</span>
+      <span class="ko"><span class="slash">/</span>superlearning: 진짜 <span class="hl-word">남는</span> 공부.</span>
+    </h1>
+    <p class="lede" data-stage style="--i:2">
+      <span class="en">Learn anything through the five senses, bite by bite, with a reward town that grows as you learn. The fun wraps a core that never changes: a plain definition, a concrete worked example, and an own-words say-back. You remember what you MAKE, not what you watch.</span>
+      <span class="ko">다섯 가지 감각으로, 한 입씩, 배울수록 자라나는 보상 마을과 함께 무엇이든 배우세요. 즐거움 뒤엔 절대 바뀌지 않는 핵심이 있습니다. 쉬운 정의, 구체적인 풀이 예시, 자기 말로 되말하기. 보는 것이 아니라 만드는 것을 기억합니다.</span>
+    </p>
+    <div class="cta-row" data-stage style="--i:3">
+      <a class="btn btn-primary" href="#install"><span class="en">Install the skill</span><span class="ko">스킬 설치하기</span></a>
+      <a class="btn btn-ghost" href="#senses"><span class="en">See five channels</span><span class="ko">다섯 채널 보기</span></a>
+    </div>
+    <p class="cta-note" data-stage style="--i:3">
+      <span class="en">Clone, symlink, then <b>/superlearning &lt;topic&gt;</b>. No build step. MIT.</span>
+      <span class="ko">클론하고 심링크한 뒤 <b>/superlearning &lt;주제&gt;</b>. 빌드 불필요. MIT.</span>
+    </p>
+  </div>
+
+  <div class="term glass" data-stage style="--i:2" aria-label="example /superlearning session">
+    <div class="term-bar"><span class="dot a"></span><span class="dot b"></span><span class="dot c"></span><span class="term-title">superlearning session</span></div>
+<pre><span class="tline" style="--t:.4s"><span class="dim">$ /superlearning photosynthesis</span></span>
+<span class="tline" style="--t:.85s">Learning as: <span class="draw-c">DRAW</span> – photosynthesis; channel visual; bite 1</span>
+<span class="tline" style="--t:1.2s"> </span>
+<span class="tline" style="--t:1.4s"><span class="cy">[coach]</span> A chloroplast is a factory inside a plant cell.</span>
+<span class="tline" style="--t:1.65s">  It takes light + CO&#x2082; + H&#x2082;O &#x2192; glucose + O&#x2082;.</span>
+<span class="tline" style="--t:1.95s"> </span>
+<span class="tline" style="--t:2.15s">  Sketch it as a factory floor. Arrow in: sun, CO&#x2082;,</span>
+<span class="tline" style="--t:2.4s">  H&#x2082;O. Arrow out: glucose, O&#x2082;.</span>
+<span class="tline" style="--t:2.7s"> </span>
+<span class="tline" style="--t:2.9s">  Say it back: what goes in, and what leaves?</span>
+<span class="tline" style="--t:3.2s"> </span>
+<span class="tline" style="--t:3.45s"><span class="move-c">[you]</span>  sun and CO&#x2082; go in and sugar comes out?</span>
+<span class="tline" style="--t:3.75s"><span class="cy">[coach]</span> nice start – gapType: example. What ELSE goes in?</span>
+<span class="tline" style="--t:4.05s"><span class="move-c">[you]</span>  water! H&#x2082;O.</span>
+<span class="tline" style="--t:4.35s"><span class="ok">[critic] earned: 1 block added to your town.</span></span>
+<span class="tline caret" style="--t:4.7s"><span class="dim">Town: plot  [ 1 block earned ]</span></span></pre>
+  </div>
+</section>
+
+<div class="ticker-wrap" aria-hidden="true">
+  <div class="ticker">
+    <span class="draw-t">DRAW</span><span>make, don&#x2019;t watch</span><span class="compose-t">COMPOSE</span><span>one bite at a time</span><span class="roleplay-t">ROLEPLAY</span><span>earn your blocks</span><span class="move-t">MOVE</span><span>the town remembers</span><span class="joke-t">JOKE</span><span>coach teaches &#x2022; critic rewards</span><span>never style-matched</span><span>bite by bite</span><span>no fake progress</span><span>five channels, one concept</span>
+    <span class="draw-t">DRAW</span><span>make, don&#x2019;t watch</span><span class="compose-t">COMPOSE</span><span>one bite at a time</span><span class="roleplay-t">ROLEPLAY</span><span>earn your blocks</span><span class="move-t">MOVE</span><span>the town remembers</span><span class="joke-t">JOKE</span><span>coach teaches &#x2022; critic rewards</span><span>never style-matched</span><span>bite by bite</span><span>no fake progress</span><span>five channels, one concept</span>
+  </div>
+</div>
+
+<section id="senses">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow"><span class="en">The heart of the skill</span><span class="ko">스킬의 핵심</span></span>
+      <h2><span class="en">Five channels. One concept. You <span class="accent">make</span> it.</span><span class="ko">다섯 채널. 하나의 개념. 당신이 <span class="accent">만듭니다</span>.</span></h2>
+      <p><span class="en">Each bite assigns exactly one channel - chosen by what the concept needs and by variety, never by a label on you. Draw one bite, sing the next, act the third: the same idea gets several different hooks into memory.</span><span class="ko">각 한 입은 채널 하나를 배정합니다. 개념이 필요로 하는 것과 다양성에 따라 고르며, 당신에게 라벨을 붙여 정하지 않습니다. 한 입은 그리고, 다음은 노래하고, 그다음은 연기합니다. 같은 아이디어가 여러 기억의 고리를 얻습니다.</span></p>
+    </div>
+    <div class="channels">
+      <div class="channel draw reveal">
+        <div class="channel-label">DRAW</div>
+        <h3><span class="en">Visual</span><span class="ko">시각</span></h3>
+        <p><span class="en">Spatial or structural content - a tree, a circuit, parts in space - that clicks when drawn by hand.</span><span class="ko">손으로 그릴 때 이해되는 공간적·구조적 내용. 트리, 회로, 공간 속 부품들.</span></p>
+        <div class="makes"><b><span class="en">Makes:</span><span class="ko">만들기:</span></b> <span class="en">a sketch or labeled diagram of the structure or flow.</span><span class="ko">구조나 흐름을 담은 스케치 또는 레이블된 다이어그램.</span></div>
+      </div>
+      <div class="channel compose reveal" style="--d:.06s">
+        <div class="channel-label">COMPOSE</div>
+        <h3><span class="en">Auditory</span><span class="ko">청각</span></h3>
+        <p><span class="en">List-like, sequential, or rhythmic content that benefits from a beat - things you want to memorize.</span><span class="ko">리듬이 도움이 되는 목록형·순차형 내용. 외워 두고 싶은 것들.</span></p>
+        <div class="makes"><b><span class="en">Makes:</span><span class="ko">만들기:</span></b> <span class="en">lyrics encoding the idea, plus a Google Lyria prompt for the track.</span><span class="ko">개념을 담은 가사와 Google Lyria에 바로 붙여 넣을 프롬프트.</span></div>
+      </div>
+      <div class="channel roleplay reveal" style="--d:.12s">
+        <div class="channel-label">ROLEPLAY</div>
+        <h3><span class="en">Narrative</span><span class="ko">서사</span></h3>
+        <p><span class="en">Causal or decision-driven content that comes alive in a "what if...?" world where the concept is the rule.</span><span class="ko">인과관계나 의사결정을 다루는 내용. 개념이 규칙이 되는 "만약...?" 세계에서 살아납니다.</span></p>
+        <div class="makes"><b><span class="en">Makes:</span><span class="ko">만들기:</span></b> <span class="en">a scene where you are the hero who must use the concept to win.</span><span class="ko">개념을 써야만 이길 수 있는, 당신이 주인공인 장면.</span></div>
+      </div>
+      <div class="channel move reveal" style="--d:.18s">
+        <div class="channel-label">MOVE</div>
+        <h3><span class="en">Kinesthetic</span><span class="ko">신체</span></h3>
+        <p><span class="en">Drill or rote content that needs many reps - tied to push-ups, sit-ups, or jumping jacks to music.</span><span class="ko">반복이 필요한 암기 내용. 음악에 맞춰 팔굽혀펴기, 윗몸일으키기, 점프에 연결됩니다.</span></p>
+        <div class="makes"><b><span class="en">Makes:</span><span class="ko">만들기:</span></b> <span class="en">one recalled item per rep - one movement, one retrieved fact.</span><span class="ko">동작 하나에 회상 하나. 한 동작, 하나의 사실.</span></div>
+      </div>
+      <div class="channel joke reveal" style="--d:.24s">
+        <div class="channel-label">JOKE</div>
+        <h3><span class="en">Humor</span><span class="ko">유머</span></h3>
+        <p><span class="en">A sticky, easily-confused point that becomes undeniable once a POW! punchline makes the mechanism land.</span><span class="ko">헷갈리기 쉬운 개념. POW! 한 방 펀치라인이 메커니즘을 명확하게 만들면 절대 잊지 않습니다.</span></p>
+        <div class="makes"><b><span class="en">Makes:</span><span class="ko">만들기:</span></b> <span class="en">a punchline whose joke only lands if you understand the mechanism.</span><span class="ko">메커니즘을 이해해야만 웃길 수 있는 펀치라인.</span></div>
+      </div>
+    </div>
+    <div class="aside-note reveal">
+      <b><span class="en">Honest note:</span><span class="ko">솔직한 한 마디:</span></b>
+      <span class="en"> Multi-sensory means multiple channels of ENCODING - more hooks for later retrieval. It is NOT "learning styles": teaching to a learner's self-reported style has no good supporting evidence, and the gate blocks that language. The channel is chosen by content needs and variety, not by typing the person.</span>
+      <span class="ko"> 다감각이란 인코딩의 여러 채널을 쓴다는 뜻으로, 나중에 꺼낼 고리가 더 많아지는 것입니다. "학습 스타일"이 아닙니다. 학습자의 자기 보고 스타일에 맞추는 것을 뒷받침할 근거는 없으며, 게이트는 그런 표현을 막습니다. 채널은 내용이 필요로 하는 것과 다양성에 따라 선택하며, 사람에게 라벨을 붙여 정하지 않습니다.</span>
+    </div>
+  </div>
+</section>
+
+<section id="town">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow"><span class="en">Reward town and memory palace</span><span class="ko">보상 마을이자 기억의 궁전</span></span>
+      <h2><span class="en">Every block <span class="accent">earned</span> is a building that remembers.</span><span class="ko">얻은 블록 하나하나가 <span class="accent">기억하는</span> 건물이 됩니다.</span></h2>
+      <p><span class="en">Finishing a bite with a passed retrieval earns a block. Blocks build the town tier by tier. Every building is tagged with the concept it stands for, so the town you built doubles as a memory palace you can walk to review. Growth is the reward AND the review map.</span><span class="ko">회상 검사를 통과하며 한 입을 마치면 블록을 얻습니다. 블록이 쌓여 마을이 단계별로 자랍니다. 모든 건물엔 해당 개념이 태그되어 있어, 당신이 지은 마을은 곧 걸으며 복습할 수 있는 기억의 궁전입니다. 성장이 보상이자 복습 지도입니다.</span></p>
+    </div>
+    <div class="town-layout">
+      <div>
+        <ul class="tiers">
+          <li class="tier-item glass reveal">
+            <div class="tier-n t1">P</div>
+            <div class="tier-name">plot</div>
+            <div class="tier-desc"><span class="en">An empty lot where the first block is planted.</span><span class="ko">첫 번째 블록이 심어지는 빈 땅.</span></div>
+          </li>
+          <li class="tier-item glass reveal" style="--d:.05s">
+            <div class="tier-n t2">R</div>
+            <div class="tier-name">room</div>
+            <div class="tier-desc"><span class="en">A single room rises. Early concepts find walls.</span><span class="ko">방 하나가 올라옵니다. 초기 개념들이 벽을 얻습니다.</span></div>
+          </li>
+          <li class="tier-item glass reveal" style="--d:.10s">
+            <div class="tier-n t3">H</div>
+            <div class="tier-name">house</div>
+            <div class="tier-desc"><span class="en">A full structure. Several concepts live here now.</span><span class="ko">온전한 집. 여러 개념이 이 안에 자리를 잡습니다.</span></div>
+          </li>
+          <li class="tier-item glass reveal" style="--d:.15s">
+            <div class="tier-n t4">V</div>
+            <div class="tier-name">village</div>
+            <div class="tier-desc"><span class="en">A cluster of buildings - a rich, growing web of knowledge.</span><span class="ko">건물들이 모인 마을. 촘촘하게 자라나는 지식의 그물.</span></div>
+          </li>
+          <li class="tier-item glass reveal" style="--d:.20s">
+            <div class="tier-n t5">C</div>
+            <div class="tier-name">city</div>
+            <div class="tier-desc"><span class="en">A skyline of mastered concepts. Walk it to review everything you earned.</span><span class="ko">숙달된 개념들의 스카이라인. 걸으면 쌓아 온 것이 복습됩니다.</span></div>
+          </li>
+        </ul>
+        <div class="aside-note palace-note reveal" style="--d:.24s">
+          <b><span class="en">No self-awarding.</span><span class="ko">자기 수여 없음.</span></b>
+          <span class="en"> The learning-coach never marks its own block earned and never stamps its own mastered claim. Only the independent engagement-critic does, after the gate is green. A reward you can hand yourself is worth nothing.</span>
+          <span class="ko"> learning-coach는 자신이 가르친 블록에 earned를 표시하거나 mastered를 찍지 않습니다. 게이트가 초록이 된 후, 오직 독립된 engagement-critic만이 합니다. 스스로 줄 수 있는 보상은 아무 의미가 없습니다.</span>
+        </div>
+      </div>
+
+      <div class="town-visual glass reveal" style="--d:.08s">
+        <!-- Inline SVG: stylized building-blocks town growing plot to city -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Town growing from a single plot on the left through room and house and village to a city skyline on the right">
+          <title>Town growth: plot to city</title>
+          <rect width="320" height="200" fill="#0A0B10"/>
+          <!-- Ground -->
+          <rect x="0" y="160" width="320" height="40" fill="#111420" rx="0"/>
+          <rect x="0" y="159" width="320" height="2" fill="rgba(244,243,240,.06)"/>
+
+          <!-- PLOT: golden tile -->
+          <rect x="8" y="152" width="38" height="8" rx="2" fill="rgba(255,209,102,.55)"/>
+          <text x="27" y="150" fill="#FFD166" font-size="6.5" text-anchor="middle" font-family="monospace" opacity=".85">plot</text>
+
+          <!-- ROOM: small cube, cyan -->
+          <rect x="60" y="130" width="30" height="30" rx="2" fill="rgba(94,200,255,.10)" stroke="#5EC8FF" stroke-width="1.4" opacity=".85"/>
+          <rect x="68" y="140" width="7" height="7" rx="1" fill="#5EC8FF" opacity=".4"/>
+          <text x="75" y="126" fill="#5EC8FF" font-size="6.5" text-anchor="middle" font-family="monospace" opacity=".85">room</text>
+
+          <!-- HOUSE: box plus roof, mint -->
+          <rect x="106" y="110" width="36" height="50" rx="2" fill="rgba(115,239,186,.09)" stroke="#73EFBA" stroke-width="1.4" opacity=".85"/>
+          <polygon points="104,112 144,112 124,92" fill="rgba(115,239,186,.09)" stroke="#73EFBA" stroke-width="1.4" opacity=".75"/>
+          <rect x="110" y="122" width="7" height="7" rx="1" fill="#73EFBA" opacity=".38"/>
+          <rect x="128" y="122" width="7" height="7" rx="1" fill="#73EFBA" opacity=".38"/>
+          <text x="124" y="88" fill="#73EFBA" font-size="6.5" text-anchor="middle" font-family="monospace" opacity=".85">house</text>
+
+          <!-- VILLAGE: two buildings, coral -->
+          <rect x="158" y="98" width="28" height="62" rx="2" fill="rgba(255,107,107,.09)" stroke="#FF6B6B" stroke-width="1.4" opacity=".8"/>
+          <rect x="190" y="114" width="22" height="46" rx="2" fill="rgba(255,107,107,.07)" stroke="#FF6B6B" stroke-width="1.2" opacity=".65"/>
+          <rect x="162" y="112" width="6" height="6" rx="1" fill="#FF6B6B" opacity=".32"/>
+          <rect x="173" y="112" width="6" height="6" rx="1" fill="#FF6B6B" opacity=".32"/>
+          <rect x="193" y="124" width="5" height="5" rx="1" fill="#FF6B6B" opacity=".3"/>
+          <text x="181" y="94" fill="#FF6B6B" font-size="6.5" text-anchor="middle" font-family="monospace" opacity=".85">village</text>
+
+          <!-- CITY: tall building cluster, pink -->
+          <rect x="226" y="60" width="28" height="100" rx="2" fill="rgba(255,133,161,.10)" stroke="#FF85A1" stroke-width="1.4" opacity=".85"/>
+          <line x1="240" y1="60" x2="240" y2="50" stroke="#FF85A1" stroke-width="1.4" opacity=".6"/>
+          <circle cx="240" cy="48" r="2.5" fill="#FF85A1" opacity=".7"/>
+          <rect x="258" y="80" width="22" height="80" rx="2" fill="rgba(255,133,161,.07)" stroke="#FF85A1" stroke-width="1.2" opacity=".68"/>
+          <rect x="284" y="100" width="20" height="60" rx="2" fill="rgba(255,133,161,.06)" stroke="#FF85A1" stroke-width="1.1" opacity=".55"/>
+          <rect x="229" y="74" width="5" height="5" rx="1" fill="#FF85A1" opacity=".36"/>
+          <rect x="238" y="74" width="5" height="5" rx="1" fill="#FF85A1" opacity=".36"/>
+          <rect x="247" y="74" width="5" height="5" rx="1" fill="#FF85A1" opacity=".36"/>
+          <rect x="229" y="86" width="5" height="5" rx="1" fill="#FF85A1" opacity=".3"/>
+          <rect x="238" y="86" width="5" height="5" rx="1" fill="#FF85A1" opacity=".3"/>
+          <rect x="261" y="92" width="5" height="5" rx="1" fill="#FF85A1" opacity=".3"/>
+          <rect x="270" y="92" width="5" height="5" rx="1" fill="#FF85A1" opacity=".3"/>
+          <text x="252" y="46" fill="#FF85A1" font-size="6.5" text-anchor="middle" font-family="monospace" opacity=".85">city</text>
+
+          <!-- Concept tags on buildings (memory palace) -->
+          <text x="27" y="177" fill="#78766E" font-size="5.5" text-anchor="middle" font-family="monospace">#concept-1</text>
+          <text x="75" y="177" fill="#78766E" font-size="5.5" text-anchor="middle" font-family="monospace">#concept-2</text>
+          <text x="124" y="177" fill="#78766E" font-size="5.5" text-anchor="middle" font-family="monospace">#concept-3</text>
+          <text x="181" y="177" fill="#78766E" font-size="5.5" text-anchor="middle" font-family="monospace">#concepts 4-5</text>
+          <text x="252" y="177" fill="#78766E" font-size="5.5" text-anchor="middle" font-family="monospace">#concepts 6+</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="loop">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow"><span class="en">Role-separated, builder never awards itself</span><span class="ko">역할 분리, 만든 쪽이 수여하지 않음</span></span>
+      <h2><span class="en">The coach teaches. An independent critic runs the gate.</span><span class="ko">코치가 가르치고, 독립 검토자가 게이트를 돌립니다.</span></h2>
+      <p><span class="en">Live bites run inline: the learner's making-and-saying-back is the live verifier, so the coach grades the say-back without a per-bite reviewer. The independent engagement-critic runs the gate only at the reward boundary - certifying earned blocks and mastered concepts. A researcher sources facts only when a bite states one. No self-approval.</span><span class="ko">라이브 한 입은 인라인으로 진행됩니다. 학습자의 만들기·되말하기가 실시간 검증자이므로, 코치는 매 한 입마다 검토자 없이 되말하기를 채점합니다. 독립된 engagement-critic은 보상 경계에서만 게이트를 돌립니다. 획득한 블록과 mastered 개념을 인증합니다. 리서처는 한 입이 외부 사실을 말할 때만 출처를 찾습니다. 자기 승인은 없습니다.</span></p>
+    </div>
+    <div class="loop-steps">
+      <div class="step glass reveal"><span class="role-badge coach"><span class="en">coach</span><span class="ko">코치</span></span><div class="sn">1</div><h3><span class="en">Frame</span><span class="ko">분류</span></h3><p><span class="en">Classify the request into one mode in a single line. Create or locate the vault at .superlearning/&lt;topic&gt;/.</span><span class="ko">한 줄로 모드를 정합니다. .superlearning/&lt;주제&gt;/에 볼트를 만들거나 찾습니다.</span></p></div>
+      <div class="step glass reveal" style="--d:.05s"><span class="role-badge coach"><span class="en">coach</span><span class="ko">코치</span></span><div class="sn">2</div><h3><span class="en">Diagnose</span><span class="ko">진단</span></h3><p><span class="en">A quick, playful prior-knowledge probe. Pick the next small bite and the channel that fits it - and isn't the one just used.</span><span class="ko">빠르고 유쾌한 사전 지식 탐색. 다음 작은 한 입과 맞는 채널을 고릅니다. 방금 쓴 채널은 반복하지 않습니다.</span></p></div>
+      <div class="step glass reveal" style="--d:.10s"><span class="role-badge research"><span class="en">researcher</span><span class="ko">리서처</span></span><div class="sn">3</div><h3><span class="en">Source</span><span class="ko">출처</span></h3><p><span class="en">Only when a bite states an external fact: verify it into facts.json with a URL. Unverifiable becomes a documented placeholder, never an invented fact. Skip for pure-reasoning bites.</span><span class="ko">한 입이 외부 사실을 말할 때만: URL과 함께 facts.json에 검증합니다. 확인 불가는 명시된 자리표시자로. 지어낸 사실은 없습니다. 순수 추론 한 입은 건너뜁니다.</span></p></div>
+      <div class="step glass reveal" style="--d:.15s"><span class="role-badge coach"><span class="en">coach</span><span class="ko">코치</span></span><div class="sn">4</div><h3><span class="en">Teach the bite</span><span class="ko">한 입 가르치기</span></h3><p><span class="en">Deliver definition + worked example + ONE sensory activity the learner makes. By default the explanation renders to material/activity-NN.html; the restatement prompt and grading stay in the terminal.</span><span class="ko">정의 + 풀이 예시 + 학습자가 만들 감각 활동 하나. 기본으로 설명은 material/activity-NN.html에 렌더링하고, 되말하기 질문과 채점은 터미널에 둡니다.</span></p></div>
+      <div class="step glass reveal"><span class="role-badge learner"><span class="en">learner</span><span class="ko">학습자</span></span><div class="sn">5</div><h3><span class="en">Produce + grade</span><span class="ko">만들기 + 채점</span></h3><p><span class="en">The learner makes the artifact and says the idea back. Coach names the first gap by the 6-type rubric and returns exactly one follow-up question. Loop within the bite until gap-free.</span><span class="ko">학습자가 산출물을 만들고 개념을 되말합니다. 코치는 6가지 루브릭으로 첫 빈틈을 짚고 후속 질문 하나를 냅니다. 빈틈이 없을 때까지 반복합니다.</span></p></div>
+      <div class="step glass reveal" style="--d:.05s"><span class="role-badge critic"><span class="en">critic</span><span class="ko">검토자</span></span><div class="sn">6</div><h3><span class="en">Reward-check</span><span class="ko">보상 검사</span></h3><p><span class="en">At the session/world boundary only: the engagement-critic re-reads the vault, runs engagement-gate.mjs, and prints any violation as file:locator. It alone marks earned:true and mastered:true.</span><span class="ko">세션/월드 경계에서만: engagement-critic이 볼트를 다시 읽고 engagement-gate.mjs를 돌려 위반을 file:locator로 출력합니다. earned:true와 mastered:true를 표시하는 것은 이 역할만입니다.</span></p></div>
+      <div class="step glass reveal" style="--d:.10s"><span class="role-badge coach"><span class="en">coach</span><span class="ko">코치</span></span><div class="sn">7</div><h3><span class="en">Grow the town</span><span class="ko">마을 키우기</span></h3><p><span class="en">After the gate is green: add earned blocks to progress-state.json, bump xp and streak, advance the tier when thresholds are crossed, and re-render world/world.html. Schedule spaced retrieval: 1 day / 1 week / 1 month.</span><span class="ko">게이트가 초록이면: 획득한 블록을 progress-state.json에 추가하고 xp·streak를 올리고 world/world.html을 다시 그립니다. 분산 복습 일정: 1일 / 1주 / 1개월.</span></p></div>
+    </div>
+  </div>
+</section>
+
+<section id="gate">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow"><span class="en">Deterministic, not eyeballed</span><span class="ko">눈대중이 아니라 결정적으로</span></span>
+      <h2><span class="en">Five sub-gates, run in order. Any FAIL is an overall FAIL.</span><span class="ko">다섯 서브게이트를 순서대로. 하나라도 FAIL이면 전체 FAIL.</span></h2>
+      <p><span class="en">node templates/engagement-gate.mjs .superlearning/&lt;topic&gt; reads the vault control files - never guesses - and prints file:locator violations verbatim. It also checks world/world.html structurally in the same run. The learning-coach cannot run this on its own work.</span><span class="ko">node templates/engagement-gate.mjs .superlearning/&lt;주제&gt;는 볼트 파일을 읽고 추측하지 않으며, file:locator 위반을 그대로 출력합니다. 같은 실행에서 world/world.html도 구조적으로 검사합니다. learning-coach는 자기 작업에 이걸 돌릴 수 없습니다.</span></p>
+    </div>
+    <div class="gate-layout">
+      <div class="reveal">
+        <ul class="gate-list glass">
+          <li>
+            <span class="gate-no">1</span>
+            <span>
+              <span class="gate-key">never-vague</span>
+              <span class="gate-desc"><span class="en">non-empty jargon-free definition + concrete workedExample (not analogy-only, not a restated definition) + restatementPrompt on every concept; declared jargon unpacked</span><span class="ko">모든 개념에 비어 있지 않은 쉬운 정의 + 구체적 workedExample(비유만은 안 됨, 정의 반복도 안 됨) + restatementPrompt; 선언된 전문용어 해설</span></span>
+            </span>
+          </li>
+          <li>
+            <span class="gate-no">2</span>
+            <span>
+              <span class="gate-key">active-engagement</span>
+              <span class="gate-desc"><span class="en">valid channel (visual|auditory|narrative|kinesthetic|humor); produced:true - the learner made it, not consumed it; non-empty retrievalRole; learning-style language fails</span><span class="ko">유효한 채널(visual|auditory|narrative|kinesthetic|humor); produced:true - 소비가 아닌 생산; 비어 있지 않은 retrievalRole; 학습 스타일 언어는 FAIL</span></span>
+            </span>
+          </li>
+          <li>
+            <span class="gate-no">3</span>
+            <span>
+              <span class="gate-key">bitesize</span>
+              <span class="gate-desc"><span class="en">one concept per bite; at most 4 new jargon terms (more overflows working memory); each grading carries exactly one gapType and one follow-up question, not a dump</span><span class="ko">한 입에 개념 하나; 새 전문용어 최대 4개(더 많으면 작업 기억 초과); 각 채점은 gapType 하나와 후속 질문 하나만 - 묶어서 내지 않음</span></span>
+            </span>
+          </li>
+          <li>
+            <span class="gate-no">4</span>
+            <span>
+              <span class="gate-key">reward-integrity</span>
+              <span class="gate-desc"><span class="en">every earned:true world block maps to a concept actually taught and mastered with retrievalPassed:true; a re-teach uses a different channel; no fabricated progress</span><span class="ko">earned:true 월드 블록은 실제로 가르쳐지고 retrievalPassed:true로 숙달된 개념과 연결; 재교육은 반드시 다른 채널; 조작된 진행 없음</span></span>
+            </span>
+          </li>
+          <li>
+            <span class="gate-no">5</span>
+            <span>
+              <span class="gate-key">integrity</span>
+              <span class="gate-desc"><span class="en">every factual:true claim resolves to a facts.json source with a non-empty url; no fabrication, no unmarked placeholder</span><span class="ko">factual:true 주장은 모두 비어 있지 않은 url의 facts.json 출처로 연결; 조작 없음, 표시 없는 자리표시자 없음</span></span>
+            </span>
+          </li>
+        </ul>
+      </div>
+      <div class="term glass reveal" style="--d:.1s" aria-label="engagement-gate output showing all five sub-gates passing">
+        <div class="term-bar"><span class="dot a"></span><span class="dot b"></span><span class="dot c"></span><span class="term-title">engagement-gate.mjs .superlearning/photosynthesis</span></div>
+<pre><span class="dim">$ node templates/engagement-gate.mjs .superlearning/photosynthesis</span>
+<span class="dim">== /superlearning gate ==</span>
+<span class="dim">checked: 1 target(s)</span>
+
+<span class="am">[1/5] never-vague</span> ................ <span class="ok">PASS</span>
+<span class="am">[2/5] active-engagement</span> ......... <span class="ok">PASS</span>
+<span class="am">[3/5] bitesize</span> ................... <span class="ok">PASS</span>
+<span class="am">[4/5] reward-integrity</span> .......... <span class="ok">PASS</span>
+<span class="am">[5/5] integrity</span> .................. <span class="ok">PASS</span>
+<span class="dim">------------------------------------</span>
+<span class="ok">== GATE PASS ==</span>
+</pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="install">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow"><span class="en">This repo is the skill</span><span class="ko">이 저장소가 곧 스킬</span></span>
+      <h2><span class="en">Clone, symlink, /superlearning.</span><span class="ko">클론하고, 연결하고, /superlearning.</span></h2>
+    </div>
+    <div class="install">
+      <div class="term glass reveal">
+        <div class="term-bar"><span class="dot a"></span><span class="dot b"></span><span class="dot c"></span><span class="term-title">shell</span></div>
+<pre><span class="dim"># clone the skill</span>
+git clone https://github.com/cskwork/superlearning-skill.git
+
+<span class="dim"># symlink it where your agent CLI finds skills</span>
+ln -s "$(pwd)/superlearning-skill" ~/.claude/skills/superlearning
+
+<span class="dim"># then, in your agent CLI</span>
+<span class="cy">/superlearning</span> photosynthesis</pre>
+      </div>
+      <div class="install-card glass reveal" style="--d:.08s">
+        <h3><span class="en">No extra service. Just the files.</span><span class="ko">추가 서비스 없음. 파일만.</span></h3>
+        <p><span class="en">The gate uses Node. Five channels, one topic at a time, a vault that grows honestly, and a town that remembers everything you earned.</span><span class="ko">게이트는 Node를 씁니다. 다섯 채널, 한 번에 주제 하나, 정직하게 성장하는 볼트, 그리고 당신이 얻은 모든 것을 기억하는 마을.</span></p>
+        <div class="pill-row">
+          <span class="tag-pill">Agent CLI</span>
+          <span class="tag-pill">Node</span>
+          <span class="tag-pill">MIT</span>
+          <span class="tag-pill">EN / KO</span>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="foot-row">
+        <div>super<b>learning</b> &middot; <span class="en">learn with all five senses, bite by bite</span><span class="ko">다섯 가지 감각으로, 한 입씩</span> &middot; MIT</div>
+        <div style="display:flex;gap:20px">
+          <a href="https://github.com/cskwork/superlearning-skill">GitHub</a>
+          <a href="#top"><span class="en">Back to top</span><span class="ko">맨 위로</span></a>
+        </div>
+      </div>
+      <p class="foot-note">
+        <span class="en">Any factual claim stated in a live lesson is sourced into the vault's facts.json, not pulled from model memory. The gate's five sub-gates run in order and are never weakened to pass a lesson - fix the lesson. NEVER weaken a gate to make a failing lesson pass.</span>
+        <span class="ko">실제 레슨에서 말하는 모든 사실 주장은 모델 기억이 아니라 볼트의 facts.json에 출처를 검증해 넣습니다. 게이트의 다섯 서브게이트는 순서대로 실행되며, 레슨을 통과시키려고 약하게 만들지 않습니다. 레슨을 고치세요.</span>
+      </p>
+    </footer>
+  </div>
+</section>
+</main>
+
+<script>
+  (function(){
+    var root = document.documentElement;
+    var toggle = document.getElementById("langToggle");
+
+    function setLang(lang){
+      root.lang = (lang === "ko") ? "ko" : "en";
+      try { localStorage.setItem("superlearning-lang", root.lang); } catch(e) {}
+    }
+    var saved = null; try { saved = localStorage.getItem("superlearning-lang"); } catch(e) {}
+    var q = null; try { q = new URLSearchParams(location.search).get("lang"); } catch(e) {}
+    var initial = (q === "en" || q === "ko") ? q
+      : (saved || ((navigator.language || "en").toLowerCase().indexOf("ko") === 0 ? "ko" : "en"));
+    setLang(initial);
+
+    if (toggle) toggle.addEventListener("click", function(){
+      var next = root.lang === "en" ? "ko" : "en";
+      var rm = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (document.startViewTransition && !rm) { document.startViewTransition(function(){ setLang(next); }); }
+      else { setLang(next); }
+    });
+
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    // Reveal on scroll: IntersectionObserver only, no scroll listener.
+    var els = document.querySelectorAll(".reveal");
+    if (reduce || !("IntersectionObserver" in window)) {
+      els.forEach(function(e){ e.classList.add("in"); });
+    } else {
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(en){ if (en.isIntersecting){ en.target.classList.add("in"); io.unobserve(en.target); } });
+      }, { threshold: 0.12 });
+      els.forEach(function(e){ io.observe(e); });
+    }
+
+    // Active dock pill via section observer (no scroll listener).
+    var links = {};
+    document.querySelectorAll(".dock-link").forEach(function(a){ links[a.getAttribute("href").slice(1)] = a; });
+    if ("IntersectionObserver" in window) {
+      var spy = new IntersectionObserver(function(entries){
+        entries.forEach(function(en){
+          if (en.isIntersecting){
+            Object.keys(links).forEach(function(k){ links[k].classList.toggle("active", k === en.target.id); });
+          }
+        });
+      }, { rootMargin: "-45% 0px -50% 0px" });
+      ["senses","town","loop","gate","install"].forEach(function(id){ var s = document.getElementById(id); if (s) spy.observe(s); });
+    }
+  })();
+</script>
+</body>
+</html>
