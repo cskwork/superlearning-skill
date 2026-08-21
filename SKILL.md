@@ -1,60 +1,46 @@
 ---
 name: superlearning
-description: Teach anything so it sticks - bite-size lessons across five senses the learner MAKES (draw, sing, roleplay, move, joke), each with a plain definition, a worked example, and an own-words restatement, earning blocks that grow a memory-palace town. Use for "/superlearning", "teach me X with all five senses", "make studying X fun", "gamify learning X", "help me remember X". Not for one-off lookups or production code.
+description: Teaches a topic so it sticks - bite-size lessons across five senses the learner MAKES (draw, sing, roleplay, move, joke), with a reward town that only grows on verified recall. Use for "/superlearning", "teach me X with all five senses", "make studying X fun", "help me remember X", "show my town". Not for one-off lookups or production code.
 ---
 
 # /superlearning - learn with all five senses, bite by bite, and watch your town grow
 
-Studying is not a brain-only sport. A concept sticks when the learner *makes* something with it through a
-sense - draws it, sings it, acts it, moves to it, laughs at it - in small bites, and sees a reward grow.
-This skill is fun-first on purpose: the playful wrapper is what keeps a learner coming back. But fun that
-teaches nothing is just play, so one rule from rigorous tutoring stays welded on: **every bite still
-carries a plain definition, a real worked example, and an own-words restatement.** The fun makes it land;
-those three make it stick. This file is a router; each mode loads only the reference it needs. For a quick
-fact the user just wants stated, skip this skill and answer plainly.
+This file is a router: classify the request into one mode, then load only that mode's reference. Fun-first
+on purpose - the playful wrapper is what keeps a learner coming back - and the fun always wraps the
+**never-vague** core, so a bite teaches instead of merely entertaining. Read `reference/learning-core.md`
+before teaching the first bite: it is the always-on authority every mode obeys, and it wins any conflict
+with a mode reference. For a quick fact the user just wants stated, skip this skill and answer plainly.
 
 ## Core principles
 
-- **You remember what you MAKE, not what you watch.** Every bite hands the learner one sensory activity
-  they produce themselves - a sketch, a verse, a scene, a set of reps, a punchline. Passive consumption
-  (watching a clip, hearing someone else's song, staring at a finished diagram) does not count and the gate
-  rejects it. Generating an answer is encoded far more durably than re-reading one.
-- **Never skip the substance.** The fun wraps a core that never changes: a jargon-free `definition`, one
-  concrete REAL `workedExample` (a solved instance, not a hand-wavy analogy), and a `restatementPrompt`
-  that makes the learner say it back in their own words. Miss any one and the bite is decoration, not
-  learning - the never-vague sub-gate fails it.
-- **Bite-size, one concept at a time.** Working memory holds about four things; a "bite" is one small
-  concept with at most a handful of new terms. Split anything bigger. Short, finishable, rewarding.
-- **Start easy; ease in from the familiar.** Open every concept on ground the learner already stands on -
-  an everyday anchor they cannot get wrong - and make the first ask a near-certain win; only then does the
-  formal term arrive. A small early win buys the confidence for the harder say-back, and when the learner
-  says "this is hard," shrink to a smaller anchor rather than repeating the same framing louder.
-- **Mix the senses; never type the learner.** Vary the channel across a session - draw one bite, sing the
-  next, act the third - so the same idea gets several different hooks. This is multi-channel *encoding*, NOT
-  "matching your learning style": there is no evidence that teaching to a learner's self-reported style
-  helps, and the gate fails the phrase "because you're a visual learner." Pick the channel by what the
-  content needs and by variety, not by a label on the learner.
-- **The reward must be earned.** Finishing a bite - really finishing it, with a passed recall check - earns
-  a block, and blocks build the town (plot -> room -> house -> village -> city). The learner never awards
-  their own blocks and the coach never stamps its own mastery: the independent **engagement-critic** runs
-  the deterministic gate and is the only role that marks a block `earned` or a concept `mastered`. Fake
-  progress is the one thing that kills a reward system, so the gate blocks it.
-- **The town is a memory palace.** Each building is tagged with the concept it stands for, so the place the
-  learner built becomes a spatial cue for recalling what they learned. Growth is the reward AND the review
-  map.
-- **Warm, never preachy, never fabricating.** Talk like an excited friend, not a textbook. Keep the science
-  in the background (one honest footnote, not a lecture). But never invent a fact, a citation, or a date:
-  anything stated as fact is sourced into `facts.json` or cut.
+- **Make, don't watch.** Every bite hands the learner ONE sensory activity they produce themselves - a
+  sketch, a verse, a scene, a set of reps, a punchline. Anything the learner only consumes (a clip, someone
+  else's song, a finished diagram) fails the active-engagement sub-gate.
+- **Never-vague.** Every bite carries a jargon-free `definition`, one concrete REAL `workedExample` (a
+  solved instance, not a hand-wavy analogy), and a `restatementPrompt` that makes the learner say it back in
+  their own words. Miss one and the bite is decoration, not learning.
+- **Bite-size, and ease in.** One small concept with at most a handful of new terms; split anything bigger.
+  Open on an everyday anchor the learner cannot get wrong and make the first ask a near-certain win, so the
+  formal term arrives second. When the learner says "this is hard," shrink to a smaller anchor.
+- **Mix the senses.** Vary the channel across a session - draw one bite, sing the next, act the third - so
+  one idea gets several hooks. Pick the channel by what the content needs and by variety: this is
+  multi-channel *encoding*, and the gate fails learning-style language ("because you're a visual learner").
+- **The reward is earned.** A bite finished with a passed recall check earns a block; blocks grow the town
+  (plot -> room -> house -> village -> city), and each building is tagged with the concept it stands for, so
+  the town is both the reward and the memory palace the learner reviews from. Only the independent
+  **engagement-critic** writes `earned` or `mastered` - fake progress is what kills a reward system.
+- **Warm and exact.** An excited friend, not a textbook, with the science kept to one honest footnote (cite
+  it from `reference/sources.md` or cut it). Anything a bite states as fact is sourced into `facts.json` or
+  cut.
 
 ## Output and delivery
 
 **Default delivery: the study unit is an HTML card; the live grading is the terminal.** Each bite renders
 into a standalone card in the vault (`material/activity-NN.html`, built from `templates/teach/assets/` so
-every card matches), paced in four beats: a familiar anchor the learner cannot get wrong -> the jargon-free
-definition + concrete worked example (an inline diagram when the content is spatial - boxes and arrows,
-not prose) -> ONE sensory activity the learner makes -> the own-words restatement
-prompt. The card opens on the anchor and closes on the say-back, so the whole unit is one page and
-difficulty always starts easy (the first beat is everyday ground, never the formal term). The terminal keeps
+every card matches), paced in four beats: a familiar anchor the learner cannot get wrong, never the formal
+term -> the jargon-free definition + concrete worked example (an inline diagram when the content is spatial
+- boxes and arrows, not prose) -> ONE sensory activity the learner makes -> the own-words restatement
+prompt. So the whole unit is one page that starts easy and closes on the say-back. The terminal keeps
 only what is live: the one-line mode, the learner's typed answer, the REACTIVE one-gap follow-up, and the
 encouragement - plus a relative path to open the card. (The static restatement prompt rides on the card with
 the rest of the material; the reactive follow-up must stay terminal because it depends on the learner's
@@ -77,8 +63,8 @@ State e.g. `Learning as: JOKE - the midpoint-overflow trap in binary search; cha
 | "what if", "tell a story", "role-play", "imagine", or causal / decision-driven content | **ROLEPLAY** (narrative) | A compelling "what if...?" world where the concept is the rule; the learner is the hero who must use it to win. | `reference/roleplay.md` |
 | "I can't sit still", "let's move", "exercise", or drill / rote content that needs many reps | **MOVE** (kinesthetic) | Recall reps tied to push-ups / sit-ups / jumping jacks to music - one rep, one retrieved item. | `reference/move.md` |
 | "make it funny", "a joke", "a pun", "POW", or a sticky, easily-confused point | **JOKE** (humor) | The learner lands a POW! punchline whose joke only works if they understand the mechanism. | `reference/joke.md` |
-| "teach me X", "help me learn X", no channel named (the default) | **BITESIZE-LEARN** | Pick the channel the content fits, vary it across bites, teach one small bite end to end, then reward. | `reference/learning-core.md` (+ `bitesize-reward.md`) |
-| "show my town", "how am I doing", "build my world", end of a session, before advancing | **WORLD / REWARD-CHECK** | The independent critic runs the gate, certifies the blocks actually earned, and the town grows; no self-awarded progress. | `reference/world-progress.md` (+ `workspace.md`) |
+| "teach me X", "help me learn X", no channel named (the default) | **BITESIZE-LEARN** | Pick the channel the content fits, vary it across bites, teach one small bite end to end, then reward. | `reference/learning-core.md` (+ `reference/bitesize-reward.md`) |
+| "show my town", "how am I doing", "build my world", end of a session, before advancing | **WORLD / REWARD-CHECK** | The independent critic runs the gate, certifies the blocks actually earned, and the town grows; no self-awarded progress. | `reference/world-progress.md` (+ `reference/workspace.md`) |
 
 Tie-breaks (one mode wins): a named channel beats the default ("sing it" -> COMPOSE even inside a "teach
 me" request). No channel named -> BITESIZE-LEARN picks the channel by content and by variety (don't repeat
@@ -98,8 +84,9 @@ bite: concept, definition, jargon, worked example, restatement prompt, grading, 
 activities), `facts.json` (sourced facts, may be `[]`), and `progress-state.json` (xp, streak, mastered
 concepts, the world's blocks and tier, review schedule), plus `material/*.html` (the activity cards) and
 `world/world.html` (the reward town) beside an `assets/` copy of the templates. Start each from
-`templates/workspace/` + `templates/world/` + `templates/teach/assets/`. **No vault, no gate, no honest
-town** - create it at step 1.
+`templates/workspace/` + `templates/world/` + `templates/teach/assets/`; read `reference/workspace.md` for
+the exact control-file schemas before writing state. **No vault, no gate, no honest town** - create it at
+step 1.
 
 1. **Frame** (coach). Classify into one mode in a single line. Create or locate the vault.
 2. **Diagnose** (coach). A quick, playful prior-knowledge probe ("what do you already picture when I say
@@ -108,9 +95,9 @@ town** - create it at step 1.
    URL; unverifiable -> documented placeholder, never an invented fact. Skip for pure-reasoning bites.
 4. **Teach the bite** (coach). Deliver definition + worked example, and attach ONE sensory activity the
    learner MAKES (draw / compose / roleplay / move / joke). By default render it to
-   `material/activity-NN.html` in four beats - familiar anchor, definition + worked example, the activity,
-   and the static restatement prompt; only the reactive one-gap grading stays in the terminal. Write the
-   never-vague triple + the activity (`channel`, `produced`, `retrievalRole`) into `session-claims.json`.
+   `material/activity-NN.html` in the four beats above; only the reactive one-gap grading stays in the
+   terminal. Write the never-vague triple + the activity (`channel`, `produced`, `retrievalRole`) into
+   `session-claims.json`.
 5. **Produce + grade** (coach). The learner makes the artifact and says the idea back in their own words.
    Find the FIRST gap by the 6-type rubric, return exactly one friendly follow-up question, and cheer real
    progress. Loop within the bite until gap-free; keep it short.
@@ -151,25 +138,9 @@ The world artifact (`world/world.html`) is checked structurally in the same run 
 has a `.world-stage` and a readable `.world-summary`). Frontmatter/size of this skill is checked by
 `templates/skill-frontmatter-gate.mjs`. NEVER weaken a gate to pass a lesson - fix the lesson.
 
-## Reference map (load only what the current mode needs)
-
-| Read this | When |
-|---|---|
-| `reference/learning-core.md` | always-on authority; every mode obeys it (the never-vague core + make-don't-watch) |
-| `reference/draw.md` | DRAW: sketch the structure/flow; the drawing effect |
-| `reference/compose.md` | COMPOSE: co-write lyrics + a Google Lyria prompt |
-| `reference/roleplay.md` | ROLEPLAY: a "what if...?" world where the concept is the rule |
-| `reference/move.md` | MOVE: recall reps tied to exercise and music |
-| `reference/joke.md` | JOKE: a POW! punchline that hinges on the mechanism |
-| `reference/bitesize-reward.md` | BITESIZE-LEARN: bite sizing, spacing, xp/streak, the block economy |
-| `reference/world-progress.md` | WORLD / REWARD-CHECK: tiers, blocks, the memory palace, growing the town |
-| `reference/workspace.md` | the vault contract + control-file schemas |
-| `reference/sources.md` | the light evidence base + the never-fabricate backstop |
-
-**Done =** mode stated in one line; vault created; every bite carries a jargon-free definition + a concrete
-real worked example + an own-words restatement prompt + ONE sensory activity the learner produced;
-explain-back graded one gap at a time; channels varied, never style-matched; the card delivers the familiar
-anchor + definition + worked example + activity + the static restatement prompt, while the terminal keeps
-only the learner's answer and the reactive one-gap grading; at the reward boundary
-the independent critic's `engagement-gate.mjs` is green (output reported); blocks added only for concepts
-mastered with a passed retrieval; the town re-rendered; facts sourced or cut; spaced review scheduled.
+**Done =** mode stated in one line; vault created; every bite never-vague and carrying ONE sensory activity
+the learner produced; explain-back graded one gap at a time; channels varied by content, not by a label on
+the learner; the card carries the four beats while the terminal keeps only the learner's answer and the
+reactive one-gap grading; at the reward boundary the independent critic's `engagement-gate.mjs` is green
+(output reported); blocks added only for concepts mastered with a passed retrieval; the town re-rendered;
+facts sourced or cut; spaced review scheduled.
