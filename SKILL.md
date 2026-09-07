@@ -1,15 +1,11 @@
 ---
 name: superlearning
-description: Teaches a topic so it sticks - bite-size lessons across five senses the learner MAKES (draw, sing, roleplay, move, joke), with a reward town that only grows on verified recall. Use for "/superlearning", "teach me X with all five senses", "make studying X fun", "help me remember X", "show my town". Not for one-off lookups or production code.
+description: Teach through small learner-created drawing, music, roleplay, movement, or humor activities, with a reward town based on verified recall. Use for playful study, memorization, and progress review; not one-off lookups or production coding.
 ---
 
 # /superlearning - learn with all five senses, bite by bite, and watch your town grow
 
-This file is a router: classify the request into one mode, then load only that mode's reference. Fun-first
-on purpose - the playful wrapper is what keeps a learner coming back - and the fun always wraps the
-**never-vague** core, so a bite teaches instead of merely entertaining. Read `reference/learning-core.md`
-before teaching the first bite: it is the always-on authority every mode obeys, and it wins any conflict
-with a mode reference. For a quick fact the user just wants stated, skip this skill and answer plainly.
+Choose one mode and load its reference. Read `reference/learning-core.md` before the first bite; it governs every mode. Each bite combines a clear explanation, learner-created activity, and recall check. Answer quick factual lookups directly.
 
 ## Core principles
 
@@ -138,9 +134,4 @@ The world artifact (`world/world.html`) is checked structurally in the same run 
 has a `.world-stage` and a readable `.world-summary`). Frontmatter/size of this skill is checked by
 `templates/skill-frontmatter-gate.mjs`. NEVER weaken a gate to pass a lesson - fix the lesson.
 
-**Done =** mode stated in one line; vault created; every bite never-vague and carrying ONE sensory activity
-the learner produced; explain-back graded one gap at a time; channels varied by content, not by a label on
-the learner; the card carries the four beats while the terminal keeps only the learner's answer and the
-reactive one-gap grading; at the reward boundary the independent critic's `engagement-gate.mjs` is green
-(output reported); blocks added only for concepts mastered with a passed retrieval; the town re-rendered;
-facts sourced or cut; spaced review scheduled.
+**Done =** the selected activity and delivery contract are met, explain-back is graded, and facts are sourced or cut. At a reward boundary, report the independent critic's gate output, add only certified blocks, render the town, and schedule spaced review. Live bites need no per-bite reviewer.
